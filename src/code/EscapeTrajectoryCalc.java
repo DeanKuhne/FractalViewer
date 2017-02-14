@@ -23,14 +23,16 @@ public class EscapeTrajectoryCalc {
 	// results should be returned as a 2-d array on int.
 
 	public int[][] escTimeMandelbrot(int[][] array) {// range from -2.15 to .6
-		int xCalc = 0;
-		int yCalc = 0;
+	    int escTimeArray[][] = new int[512][512];//array of possible escape time values
+		int xCalc;
+		int yCalc;
 		double xStep = 2.75 / 512;
 		double yStep = 2.6 / 512;
 		for (double x = -2.15; xStep <= 0.6; x += xStep) {//goes through x range
 			for (double y = -1.3; yStep <= 1.3; y += yStep) {//goes through y range
 				xCalc = (int) (Math.sqrt(x) + Math.sqrt(y) + x);//
 				yCalc = (int) ((2 * x * y) + y);
+				escTimeArray[(int) ((xStep*512)/2.75)][(int) ((yStep*512)/2.6)] = [xCalc][yCalc];
 			}
 		}
 
