@@ -21,8 +21,10 @@ public class EscapeTrajectoryCalc {
 	// these 262144 coordinate pairs. (The number 262144 is equal to 512 *
 	// 512 or the number of row & column combination). The final fractal
 	// results should be returned as a 2-d array on int.
-
-	public int[][] escTimeMandelbrot(int[][] array) {// range from -2.15 to .6
+public static void main(String args[]){
+	System.out.println(escTimeMandelbrot());
+}
+	public static int[][] escTimeMandelbrot() {// range from -2.15 to .6
 		int escTimeArray[][] = new int[512][512];// array of possible escape
 													// time values
 		double xStep = 2.75 / 512;
