@@ -33,6 +33,8 @@ public static void main(String args[]){
 		int distance;
 		for (double x = -2.15; x <= 0.6; x += xStep) {// goes through x range
 			for (double y = -1.3; y <= 1.3; y += yStep) {// goes through y range
+				System.out.println("x "+x);
+				System.out.println("y "+y);
                 int xCalc = (int) (Math.sqrt(x) + Math.sqrt(y) + x);//
 				int yCalc = (int) ((2 * x * y) + y);
 				distance = (int) (Math.sqrt(xCalc) + Math.sqrt(yCalc));
