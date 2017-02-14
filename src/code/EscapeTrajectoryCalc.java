@@ -43,7 +43,6 @@ public class EscapeTrajectoryCalc {
 			for (double y = -1.3; yStep <= 1.3; y += yStep) {//goes through y range
 				xCalc = (int) (Math.sqrt(x) + Math.sqrt(y) + x);//
 				yCalc = (int) ((2 * x * y) + y);
-				escTimeArray[(int) ((xStep*512)/2.75)][(int) ((yStep*512)/2.6)] = [xCalc][yCalc];
 			}
 		}
 
