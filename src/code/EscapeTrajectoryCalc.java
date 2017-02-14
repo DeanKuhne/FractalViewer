@@ -1,5 +1,7 @@
 package code;
 
+import java.awt.Point;
+
 public class EscapeTrajectoryCalc {
 	// Set xCalc = current point's x-coordinate
 	// Set yCalc = current point's y-coordinate
@@ -21,7 +23,16 @@ public class EscapeTrajectoryCalc {
 	// these 262144 coordinate pairs. (The number 262144 is equal to 512 *
 	// 512 or the number of row & column combination). The final fractal
 	// results should be returned as a 2-d array on int.
-
+	
+	public void BuriningShipSet(int xCalc, int yCalc){
+		for(double xCoor = -1.8; xCoor <= -1.7; xCoor = xCoor + 0.00000000000000001){
+			double vertX = (xCalc * xCalc) - (yCalc * yCalc) + xCoor;
+		}
+		for(double yCoor = -0.08; yCoor <= 0.025; yCoor = yCoor + 0.0000000000000001){
+			double vertY = Math.abs(2 * xCalc * yCalc) + yCoor;	
+		}
+	}
+	
 	public int[][] escTimeMandelbrot(int[][] array) {// range from -2.15 to .6
 	    int escTimeArray[][] = new int[512][512];//array of possible escape time values
 		int xCalc;
