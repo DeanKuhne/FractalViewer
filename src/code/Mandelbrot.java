@@ -22,10 +22,18 @@ public class Mandelbrot {
 //				escTimeArray[xCalc][yCalc] = passes;
 //			}
 		int escTimeArray[][] = new int [512][512];
-		int x = 0;
-		int y = 0;
-		int distance = (int) (Math.sqrt((x^2)+(y^2)));//c=rad(a^2+b^2)
+		int xCalc = 0;//valid x 
+		int yCalc = 0;//valid y
+		int distance = (int) (Math.sqrt((xCalc^2)+(yCalc^2)));//c=rad(a^2+b^2)
+		int passes = 0;
+		while (distance <= 4 && passes < 255) {
+			xCalc = (int) ((xCalc^2)-(yCalc^2) + xCalc);//
+			yCalc = (int) ((2 * xCalc * yCalc) + yCalc);
+			passes++;
+			distance = (int) (Math.sqrt((xCalc^2)+(yCalc^2)));//c=rad(a^2+b^2)
+		}
+		escTimeArray[xCalc][yCalc] = passes;
 
-		return escTimeArray;// replace with actual 2d array output
-	}// end of mandelbrot escape time calculation
+		return escTimeArray;
+	}
 }
