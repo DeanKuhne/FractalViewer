@@ -1,30 +1,31 @@
 package code;
 
 public class EscapeTrajectoryCalc {
-	public static int[][] escTimeMandelbrot(int column, int row, double xRangeStart, double xRangeEnd,
+	public static int[][] escTimeMandelbrot(int colAmt, int rowAmt, double xRangeStart, double xRangeEnd,
 			double yRangeStart, double yRangeEnd, int escDist, int maxStep, int choice) {
-		int escTimeArray[][] = new int[column][row];
-		double xStep = Math.abs(xRangeStart - xRangeEnd) / row;// x is row
-		double yStep = Math.abs(yRangeStart - yRangeEnd) / column;// y is column
-		double xCalc = -2.15;
-		double yCalc = -1.3;
-		double xStart = -2.15;
-		double yStart = -1.3;
+		int escTimeArray[][] = new int[colAmt][rowAmt];
+		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row
+		double yStep = Math.abs(yRangeStart - yRangeEnd) / colAmt;// y is column
+
+		double xStart = xRangeStart;
+		double yStart = yRangeStart;
+		double xCalc = xStart;
+		double yCalc = yStart;
 		double xCurrent = xCalc;
 		double yCurrent = yCalc;
 		double xTemp;
 		double yTemp;
 		double distance;
-		for (int cols = 0; cols < 512; cols++) {
+		for (int cols = 0; cols < colAmt; cols++) {
 			yCurrent = yStart + (yStep * cols);
 			xCurrent = xStart;
-			for (int rows = 0; rows < 512; rows++) {
+			for (int rows = 0; rows < rowAmt; rows++) {
 				xCurrent = xStart + (xStep * rows);
 				int passes = 0;
 				xCalc = xCurrent;
 				yCalc = yCurrent;
 				distance = (Math.sqrt((xCurrent * xCurrent) + (yCurrent * yCurrent)));
-				while (distance <= 4 && passes < 255) {
+				while (distance <= escDist && passes < maxStep) {
 					xTemp = Math.pow(xCalc, 2) - Math.pow(yCalc, 2) + xCurrent;
 					yTemp = 2 * xCurrent * yCurrent + yCurrent;
 					xCalc = xTemp;
