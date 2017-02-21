@@ -3,12 +3,14 @@ package code;
 public class Mandelbrot {
 	public static void main(String[] args) {
 		int[][] pot = escTimeMandelbrot();
-		for (int i = 0; i < pot.length; i++) {
-			System.out.println();
-			for (int j = 0; j < pot.length; j++) {
-				System.out.print("\t" + pot[i][j]);
-			}
-		}
+//		for (int i = 0; i < pot.length; i++) {
+//			System.out.println();
+//			for (int j = 0; j < pot.length; j++) {
+//				System.out.print("" + pot[i][j]);
+//			}
+//		}
+		System.out.print("" + pot[371][275]);
+
 	}
 
 	public static int[][] escTimeMandelbrot() {
@@ -23,17 +25,19 @@ public class Mandelbrot {
 		double yCurrent = yCalc;
 		double xTemp;
 		double yTemp;
-		double distance = (Math.sqrt((xCalc * xCalc) + (yCalc * yCalc)));
+		double distance;
 		for (int cols = 0; cols < 512; cols++) {
 			yCurrent = yStart + (yStep * cols);
 			xCurrent = xStart;
 			for (int rows = 0; rows < 512; rows++) {
 				xCurrent = xStart + (xStep * rows);
 				int passes = 0;
-				distance = (Math.sqrt((xCalc * xCalc) + (yCalc * yCalc)));
+				xCalc = xCurrent;
+				yCalc = yCurrent;
+				distance = (Math.sqrt((xCurrent * xCurrent) + (yCurrent * yCurrent)));
 				while (distance <= 4 && passes < 255) {
 					xTemp = Math.pow(xCalc, 2) - Math.pow(yCalc, 2) + xCurrent;
-					yTemp = 2 * xCalc * yCalc + yCurrent;
+					yTemp = 2 * xCurrent * yCurrent + yCurrent;
 					xCalc = xTemp;
 					yCalc = yTemp;
 					passes++;
