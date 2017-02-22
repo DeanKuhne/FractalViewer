@@ -12,41 +12,43 @@ public class EscapeTrajectoryCalc {
 	private static double xTemp;
 	private static double yTemp;
 
-	public static void mandData() {// mandelbrot
-		// X-coordinate range from -2.15 to 0.6
-		// Y-coordinate range from -1.3 to 1.3
-		xRangeStart = -2.15;
-		xRangeEnd = 0.6;
-		yRangeStart = -1.3;
-		yRangeEnd = 1.3;
-
-	}
-
-	public static void juliData() {// julia
-		// X-coordinate range from -1.7 to 1.7
-		// Y-coordinate range from -1.0 to 1.0
-		xRangeStart = -1.7;
-		xRangeEnd = 1.7;
-		yRangeStart = -1.0;
-		yRangeEnd = 1.0;
-	}
-
-	public static void burnData() {// burning ship
-		// X-coordinate range from -1.8 to -1.7
-		// Y-coordinate range from -0.08 to 0.025
-		xRangeStart = -1.8;
-		xRangeEnd = -1.7;
-		yRangeStart = -0.08;
-		yRangeEnd = 0.025;
-	}
-
-	public static void multData() {// multibrot
-		// X-coordinate range from -1 to 1
-		// Y-coordinate range from -1.3 to 1.3
-		xRangeStart = -1;
-		xRangeEnd = 1;
-		yRangeStart = -1.3;
-		yRangeEnd = 1.3;
+	public static void dataInput(int choice) {
+		if (choice == 1) {
+			// mandelbrot
+			// X-coordinate range from -2.15 to 0.6
+			// Y-coordinate range from -1.3 to 1.3
+			xRangeStart = -2.15;
+			xRangeEnd = 0.6;
+			yRangeStart = -1.3;
+			yRangeEnd = 1.3;
+		}
+		if (choice == 2) {
+			// julia
+			// X-coordinate range from -1.7 to 1.7
+			// Y-coordinate range from -1.0 to 1.0
+			xRangeStart = -1.7;
+			xRangeEnd = 1.7;
+			yRangeStart = -1.0;
+			yRangeEnd = 1.0;
+		}
+		if (choice == 3) {
+			// burning ship
+			// X-coordinate range from -1.8 to -1.7
+			// Y-coordinate range from -0.08 to 0.025
+			xRangeStart = -1.8;
+			xRangeEnd = -1.7;
+			yRangeStart = -0.08;
+			yRangeEnd = 0.025;
+		}
+		if (choice == 4) {
+			// multibrot
+			// X-coordinate range from -1 to 1
+			// Y-coordinate range from -1.3 to 1.3
+			xRangeStart = -1;
+			xRangeEnd = 1;
+			yRangeStart = -1.3;
+			yRangeEnd = 1.3;
+		}
 	}
 
 	public static void updateXY(int choice) {
@@ -71,15 +73,7 @@ public class EscapeTrajectoryCalc {
 	public static int[][] escTimeCalculator(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
 
 		int escTimeArray[][] = new int[colAmt][rowAmt];
-		if (choice == 1)
-			mandData();
-		if (choice == 2)
-			juliData();
-		if (choice == 3)
-			burnData();
-		if (choice == 4)
-			multData();
-
+		dataInput(choice);
 		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row
 		double yStep = Math.abs(yRangeStart - yRangeEnd) / colAmt;// y is column
 		double xStart = xRangeStart;
