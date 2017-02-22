@@ -9,7 +9,6 @@ public class Mandelbrot {
 				System.out.print("" + pot[i][j]);
 			}
 		}
-
 	}
 
 	public static int[][] escTimeMandelbrot() {

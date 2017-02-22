@@ -1,7 +1,16 @@
 package code;
 
 public class Julia {
-	public int[][] escTimeJulia(int[][] array) {
+	public static void main(String[] args) {
+		int[][] pot = escTimeJulia();
+		for (int i = 0; i < pot.length; i++) {
+			System.out.println();
+			for (int j = 0; j < pot.length; j++) {
+				System.out.print("" + pot[i][j]);
+			}
+		}
+	}
+	public static int[][] escTimeJulia() {
 		int[][] escTimeJulia = new int[512][512];
 		int xCalc = 0;
 		int yCalc = 0;
