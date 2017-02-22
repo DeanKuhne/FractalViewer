@@ -1,39 +1,49 @@
 package code;
 
 public class Mandelbrot {
-	public static int[][] escTimeMandelbrot() {// range from -2.15 to .6
-//		int escTimeArray[][] = new int[512][512];// array of possible escape
-//													// time values
-//		double xStep = 2.75 / 512;
-//		double yStep = 2.6 / 512;
-//		int passes = 0;
-//		int distance;
-//		for (double x = -2.15; x <= 0.6; x += xStep) {// goes through x range
-//			for (double y = -1.3; y <= 1.3; y += yStep) {// goes through y range
-//				System.out.println("x " + x);
-//				System.out.println("y " + y);
-//				int xCalc = (int) (Math.sqrt(x) + Math.sqrt(y) + x);//
-//				int yCalc = (int) ((2 * x * y) + y);
-//				distance = (int) (Math.sqrt(xCalc) + Math.sqrt(yCalc));
-//				while (distance <= 4 && passes < 255) {
-//					passes++;
-//					distance = (int) (Math.sqrt(xCalc) + Math.sqrt(yCalc));
-//				}
-//				escTimeArray[xCalc][yCalc] = passes;
-//			}
-		int escTimeArray[][] = new int [512][512];
-		int xCalc = 0;//valid x 
-		int yCalc = 0;//valid y
-		int distance = (int) (Math.sqrt((xCalc^2)+(yCalc^2)));//c=rad(a^2+b^2)
-		int passes = 0;
-		while (distance <= 4 && passes < 255) {
-			xCalc = (int) ((xCalc^2)-(yCalc^2) + xCalc);//
-			yCalc = (int) ((2 * xCalc * yCalc) + yCalc);
-			passes++;
-			distance = (int) (Math.sqrt((xCalc^2)+(yCalc^2)));//c=rad(a^2+b^2)
+	public static void main(String[] args) {
+		int[][] pot = escTimeMandelbrot();
+		for (int i = 0; i < pot.length; i++) {
+			System.out.println();
+			for (int j = 0; j < pot.length; j++) {
+				System.out.print("" + pot[i][j]);
+			}
 		}
-		escTimeArray[xCalc][yCalc] = passes;
+	}
 
+	public static int[][] escTimeMandelbrot() {
+		int escTimeArray[][] = new int[512][512];
+		double xStep = 2.75 / 512;
+		double yStep = 2.6 / 512;
+		double xCalc = -2.15;
+		double yCalc = -1.3;
+		double xStart = -2.15;
+		double yStart = -1.3;
+		double xCurrent = xCalc;
+		double yCurrent = yCalc;
+		double xTemp;
+		double yTemp;
+		double distance;
+		for (int cols = 0; cols < 512; cols++) {
+			yCurrent = yStart + (yStep * cols);
+			xCurrent = xStart;
+			for (int rows = 0; rows < 512; rows++) {
+				xCurrent = xStart + (xStep * rows);
+				int passes = 0;
+				xCalc = xCurrent;
+				yCalc = yCurrent;
+				distance = (Math.sqrt((xCurrent * xCurrent) + (yCurrent * yCurrent)));
+				while (distance <= 4 && passes < 255) {
+					xTemp = Math.pow(xCalc, 2) - Math.pow(yCalc, 2) + xCurrent;
+					yTemp = 2 * xCurrent * yCurrent + yCurrent;
+					xCalc = xTemp;
+					yCalc = yTemp;
+					passes++;
+					distance = (Math.sqrt((xCalc * xCalc) + (yCalc * yCalc)));
+				}
+				escTimeArray[cols][rows] = passes;
+			}
+		}
 		return escTimeArray;
 	}
 }

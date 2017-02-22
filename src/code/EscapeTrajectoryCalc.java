@@ -1,35 +1,18 @@
 package code;
 
 public class EscapeTrajectoryCalc {
-	// Set xCalc = current point's x-coordinate
-	// Set yCalc = current point's y-coordinate
-	// Set dist = distance from the point (xCalc, yCalc) to (0,0) using the
-	// Pythagorean theorem
-	// Set passes = 0
-	// While dist <_ 4 and passes < 255 do
-	// Update xCaly and yCalc equal using the update function defined for
-	// the fractal being generated
-	// Increase passes by 1
-	// Set dist distance from the point (xCalc, yCalc) to (0,0) using the
-	// Pythagorean theorem
-	// EndWhile
-	// Set the current point's escape-time equal to passes
-
+	public static int[][] escTimeMandelbrot(int colAmt, int rowAmt, double xRangeStart, double xRangeEnd,
+			double yRangeStart, double yRangeEnd, int escDist, int maxStep, int choice) {
+		int escTimeArray[][] = new int[colAmt][rowAmt];
+		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row
+		double yStep = Math.abs(yRangeStart - yRangeEnd) / colAmt;// y is column
+<<<<<<< HEAD
 	// For this first phase, you will need to split the ranges into 512
 	// equally-spaced rows and 512 equally-spaced columns. To generate the
 	// entire fractal, you simply calculate the escape-time for each of
 	// these 262144 coordinate pairs. (The number 262144 is equal to 512 *
 	// 512 or the number of row & column combination). The final fractal
 	// results should be returned as a 2-d array on int
-	
-	public void BuriningShipSet(int xCalc, int yCalc){
-		for (double xCoor = -1.8; xCoor <= -1.7; xCoor = xCoor + 0.00000000000000001) {
-			double vertX = (xCalc * xCalc) - (yCalc * yCalc) + xCoor;
-		}
-		for(double yCoor = -0.08; yCoor <= 0.025; yCoor = yCoor + 0.0000000000000001){
-			double vertY = Math.abs(2 * xCalc * yCalc) + yCoor;
-		}	
-	}
 
 	public static void main(String args[]) {
 		System.out.println(escTimeMandelbrot());
@@ -76,14 +59,37 @@ public class EscapeTrajectoryCalc {
 				xCalc = (int) (Math.sqrt(x) - Math.sqrt(y) - 0.72689);
 				yCalc = (int) ((2 * x * y) + 0.188887);
 				while (distance <= 4 && passes < 255) {
+=======
+		double xStart = xRangeStart;
+		double yStart = yRangeStart;
+		double xCalc = xStart;
+		double yCalc = yStart;
+		double xCurrent = xCalc;
+		double yCurrent = yCalc;
+		double xTemp;
+		double yTemp;
+		double distance;
+		for (int cols = 0; cols < colAmt; cols++) {
+			yCurrent = yStart + (yStep * cols);
+			xCurrent = xStart;
+			for (int rows = 0; rows < rowAmt; rows++) {
+				xCurrent = xStart + (xStep * rows);
+				int passes = 0;
+				xCalc = xCurrent;
+				yCalc = yCurrent;
+				distance = (Math.sqrt((xCurrent * xCurrent) + (yCurrent * yCurrent)));
+				while (distance <= escDist && passes < maxStep) {
+					xTemp = Math.pow(xCalc, 2) - Math.pow(yCalc, 2) + xCurrent;
+					yTemp = 2 * xCurrent * yCurrent + yCurrent;
+					xCalc = xTemp;
+					yCalc = yTemp;
+>>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
 					passes++;
-					distance = (int) (Math.sqrt(xCalc) + Math.sqrt(yCalc));
+					distance = (Math.sqrt((xCalc * xCalc) + (yCalc * yCalc)));
 				}
-				escTimeJulia[xCalc][yCalc] = passes;
+				escTimeArray[cols][rows] = passes;
 			}
 		}
-		return escTimeJulia;
+		return escTimeArray;
 	}
 }
-// two for loops going through the entire 2d arraay of possible x y values and
-// calculates perspective escape times for each
