@@ -1,20 +1,6 @@
 package code;
 
 public class EscapeTrajectoryCalc {
-<<<<<<< HEAD
-	public static int[][] escTimeMandelbrot(int colAmt, int rowAmt, double xRangeStart, double xRangeEnd,
-											double yRangeStart, double yRangeEnd, int escDist, int maxStep, int choice) {
-		int escTimeArray[][] = new int[colAmt][rowAmt];
-		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row
-		double yStep = Math.abs(yRangeStart - yRangeEnd) / colAmt;// y is column
-<<<<<<< HEAD
-	// For this first phase, you will need to split the ranges into 512
-	// equally-spaced rows and 512 equally-spaced columns. To generate the
-	// entire fractal, you simply calculate the escape-time for each of
-	// these 262144 coordinate pairs. (The number 262144 is equal to 512 *
-	// 512 or the number of row & column combination). The final fractal
-	// results should be returned as a 2-d array on int
-=======
 	private static double xRangeStart;
 	private static double yRangeStart;
 	private static double xRangeEnd;
@@ -25,7 +11,6 @@ public class EscapeTrajectoryCalc {
 	private static double yCurrent;
 	private static double xTemp;
 	private static double yTemp;
->>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
 
 	public static void mandData() {// mandelbrot
 		// X-coordinate range from -2.15 to 0.6
@@ -79,7 +64,6 @@ public class EscapeTrajectoryCalc {
 		}
 		if (choice == 4) {// multibrot update function
 			xTemp = Math.pow(xCalc, 3) - (3 * xCalc * Math.pow(yCalc, 2)) + xCurrent;
-			//yTemp = (3 * Math.pow(xCalc, 2) * yCalc) + yCurrent;
 			yTemp = (3 * Math.pow(xCalc, 2) * yCalc) - Math.pow(yCalc, 3) + yCurrent;
 		}
 	}
