@@ -69,6 +69,7 @@ public class EscapeTrajectoryCalc {
 	}
 
 	public static int[][] escTimeCalculator(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
+
 		int escTimeArray[][] = new int[colAmt][rowAmt];
 		if (choice == 1)
 			mandData();
