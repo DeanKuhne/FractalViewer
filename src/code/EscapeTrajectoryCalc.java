@@ -1,60 +1,54 @@
 package code;
 
 public class EscapeTrajectoryCalc {
-	public static int[][] escTimeMandelbrot(int colAmt, int rowAmt, double xRangeStart, double xRangeEnd,
-											double yRangeStart, double yRangeEnd, int escDist, int maxStep, int choice) {
-		
-		double escTimeArray[][] = new double[colAmt][rowAmt];
-		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row
-		double yStep = Math.abs(yRangeStart - yRangeEnd) / colAmt;// y is column
-		
-		private double xRangeStart;
-		private static double yRangeStart;
-		private static double xRangeEnd;
-		private static double yRangeEnd;
-		private static double xCalc;
-		private static double yCalc;
-		private static double xCurrent;
-		private static double yCurrent;
-		private static double xTemp;
-		private static double yTemp;
-//>>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
+	private static double xRangeStart;
+	private static double yRangeStart;
+	private static double xRangeEnd;
+	private static double yRangeEnd;
+	private static double xCalc;
+	private static double yCalc;
+	private static double xCurrent;
+	private static double yCurrent;
+	private static double xTemp;
+	private static double yTemp;
 
-	public static void mandData() {// mandelbrot
-		// X-coordinate range from -2.15 to 0.6
-		// Y-coordinate range from -1.3 to 1.3
-		xRangeStart = -2.15;
-		xRangeEnd = 0.6;
-		yRangeStart = -1.3;
-		yRangeEnd = 1.3;
-
-	}
-
-	public static void juliData() {// julia
-		// X-coordinate range from -1.7 to 1.7
-		// Y-coordinate range from -1.0 to 1.0
-		xRangeStart = -1.7;
-		xRangeEnd = 1.7;
-		yRangeStart = -1.0;
-		yRangeEnd = 1.0;
-	}
-
-	public static void burnData() {// burning ship
-		// X-coordinate range from -1.8 to -1.7
-		// Y-coordinate range from -0.08 to 0.025
-		xRangeStart = -1.8;
-		xRangeEnd = -1.7;
-		yRangeStart = -0.08;
-		yRangeEnd = 0.025;
-	}
-
-	public static void multData() {// multibrot
-		// X-coordinate range from -1 to 1
-		// Y-coordinate range from -1.3 to 1.3
-		xRangeStart = -1;
-		xRangeEnd = 1;
-		yRangeStart = -1.3;
-		yRangeEnd = 1.3;
+	public static void dataInput(int choice) {
+		if (choice == 1) {
+			// mandelbrot
+			// X-coordinate range from -2.15 to 0.6
+			// Y-coordinate range from -1.3 to 1.3
+			xRangeStart = -2.15;
+			xRangeEnd = 0.6;
+			yRangeStart = -1.3;
+			yRangeEnd = 1.3;
+		}
+		if (choice == 2) {
+			// julia
+			// X-coordinate range from -1.7 to 1.7
+			// Y-coordinate range from -1.0 to 1.0
+			xRangeStart = -1.7;
+			xRangeEnd = 1.7;
+			yRangeStart = -1.0;
+			yRangeEnd = 1.0;
+		}
+		if (choice == 3) {
+			// burning ship
+			// X-coordinate range from -1.8 to -1.7
+			// Y-coordinate range from -0.08 to 0.025
+			xRangeStart = -1.8;
+			xRangeEnd = -1.7;
+			yRangeStart = -0.08;
+			yRangeEnd = 0.025;
+		}
+		if (choice == 4) {
+			// multibrot
+			// X-coordinate range from -1 to 1
+			// Y-coordinate range from -1.3 to 1.3
+			xRangeStart = -1;
+			xRangeEnd = 1;
+			yRangeStart = -1.3;
+			yRangeEnd = 1.3;
+		}
 	}
 
 	public static void updateXY(int choice) {
@@ -72,7 +66,6 @@ public class EscapeTrajectoryCalc {
 		}
 		if (choice == 4) {// multibrot update function
 			xTemp = Math.pow(xCalc, 3) - (3 * xCalc * Math.pow(yCalc, 2)) + xCurrent;
-			//yTemp = (3 * Math.pow(xCalc, 2) * yCalc) + yCurrent;
 			yTemp = (3 * Math.pow(xCalc, 2) * yCalc) - Math.pow(yCalc, 3) + yCurrent;
 		}
 	}
@@ -80,15 +73,7 @@ public class EscapeTrajectoryCalc {
 	public static int[][] escTimeCalculator(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
 
 		int escTimeArray[][] = new int[colAmt][rowAmt];
-		if (choice == 1)
-			mandData();
-		if (choice == 2)
-			juliData();
-		if (choice == 3)
-			burnData();
-		if (choice == 4)
-			multData();
-
+		dataInput(choice);
 		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row
 		double yStep = Math.abs(yRangeStart - yRangeEnd) / colAmt;// y is column
 		double xStart = xRangeStart;
@@ -119,12 +104,4 @@ public class EscapeTrajectoryCalc {
 		}
 		return escTimeArray;
 	}
-	}
 }
-	// For this first phase, you will need to split the ranges into 512
-		// equally-spaced rows and 512 equally-spaced columns. To generate the
-		// entire fractal, you simply calculate the escape-time for each of
-		// these 262144 coordinate pairs. (The number 262144 is equal to 512 *
-		// 512 or the number of row & column combination). The final fractal
-		// results should be returned as a 2-d array on int
-		
