@@ -1,31 +1,24 @@
 package code;
 
 public class EscapeTrajectoryCalc {
-<<<<<<< HEAD
 	public static int[][] escTimeMandelbrot(int colAmt, int rowAmt, double xRangeStart, double xRangeEnd,
 											double yRangeStart, double yRangeEnd, int escDist, int maxStep, int choice) {
-		int escTimeArray[][] = new int[colAmt][rowAmt];
+		
+		double escTimeArray[][] = new double[colAmt][rowAmt];
 		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row
 		double yStep = Math.abs(yRangeStart - yRangeEnd) / colAmt;// y is column
-<<<<<<< HEAD
-	// For this first phase, you will need to split the ranges into 512
-	// equally-spaced rows and 512 equally-spaced columns. To generate the
-	// entire fractal, you simply calculate the escape-time for each of
-	// these 262144 coordinate pairs. (The number 262144 is equal to 512 *
-	// 512 or the number of row & column combination). The final fractal
-	// results should be returned as a 2-d array on int
-=======
-	private static double xRangeStart;
-	private static double yRangeStart;
-	private static double xRangeEnd;
-	private static double yRangeEnd;
-	private static double xCalc;
-	private static double yCalc;
-	private static double xCurrent;
-	private static double yCurrent;
-	private static double xTemp;
-	private static double yTemp;
->>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
+		
+		private double xRangeStart;
+		private static double yRangeStart;
+		private static double xRangeEnd;
+		private static double yRangeEnd;
+		private static double xCalc;
+		private static double yCalc;
+		private static double xCurrent;
+		private static double yCurrent;
+		private static double xTemp;
+		private static double yTemp;
+//>>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
 
 	public static void mandData() {// mandelbrot
 		// X-coordinate range from -2.15 to 0.6
@@ -126,4 +119,12 @@ public class EscapeTrajectoryCalc {
 		}
 		return escTimeArray;
 	}
+	}
 }
+	// For this first phase, you will need to split the ranges into 512
+		// equally-spaced rows and 512 equally-spaced columns. To generate the
+		// entire fractal, you simply calculate the escape-time for each of
+		// these 262144 coordinate pairs. (The number 262144 is equal to 512 *
+		// 512 or the number of row & column combination). The final fractal
+		// results should be returned as a 2-d array on int
+		
