@@ -1,6 +1,6 @@
 package code;
 
-public class EscapeTrajectoryCalc {
+public class EscapeTimeAlgorithm {
 	private static double xRangeStart;
 	private static double yRangeStart;
 	private static double xRangeEnd;
@@ -68,6 +68,23 @@ public class EscapeTrajectoryCalc {
 			xTemp = Math.pow(xCalc, 3) - (3 * xCalc * Math.pow(yCalc, 2)) + xCurrent;
 			yTemp = (3 * Math.pow(xCalc, 2) * yCalc) - Math.pow(yCalc, 3) + yCurrent;
 		}
+	}
+
+	public int escTimeCoords(double x, double y, int choice) {
+		xCurrent = x;
+		yCurrent = y;
+		xCalc = xCurrent;
+		yCalc = yCurrent;
+		int passes = 0;
+		double dist = Math.sqrt(Math.pow(xCurrent, 2) + Math.pow(yCurrent, 2));
+		while (dist <= 4 && passes < 255) {
+			updateXY(choice);
+			xCalc = xTemp;
+			yCalc = yTemp;
+			passes++;
+			dist = Math.sqrt(Math.pow(xCalc, 2) + Math.pow(yCalc, 2));
+		}
+		return passes;
 	}
 
 	public static int[][] escTimeCalculator(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
