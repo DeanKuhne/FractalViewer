@@ -78,13 +78,13 @@ public class EscapeTimeCalcTest {
 		// 512 rows and 512 columns (1 test per fractal) [4 * 2 points = 8
 		// points]
 		int[][] mand = EscapeTimeAlgorithm.escTimeCalculator(512, 512, 4, 255, 1);
-		assertEquals(mand.length == 512 && mand[0].length == 512, .01);
+		assertTrue(mand.length == 512 && mand[0].length == 512);
 		int[][] juli = EscapeTimeAlgorithm.escTimeCalculator(512, 512, 4, 255, 2);
-		assertEquals(juli.length == 512 && juli[0].length == 512, .01);
+		assertTrue(juli.length == 512 && juli[0].length == 512);
 		int[][] burn = EscapeTimeAlgorithm.escTimeCalculator(512, 512, 4, 255, 3);
-		assertEquals(burn.length == 512 && burn[0].length == 512, .01);
+		assertTrue(burn.length == 512 && burn[0].length == 512);
 		int[][] mult = EscapeTimeAlgorithm.escTimeCalculator(512, 512, 4, 255, 4);
-		assertEquals(mult.length == 512 && mult[0].length == 512, .01);
+		assertTrue(mult.length == 512 && mult[0].length == 512);
 
 	}
 }
