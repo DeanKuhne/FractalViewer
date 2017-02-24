@@ -12,7 +12,50 @@ public class EscapeTimeAlgorithm {
 	private static double xTemp;
 	private static double yTemp;
 
+	public double getxVal(int x, int choice) {
+		// method to show x value's translation to the column
+		double xVal;
+		dataInput(choice);
+		if (choice == 1) {// mandelbrot set
+			xVal = x * 512 + xRangeStart;
+		}
+		if (choice == 2) {// julia set
+			xVal = x * 512 + xRangeStart;
+		}
+		if (choice == 3) {// burning ship set
+			xVal = x * 512 + xRangeStart;
+		}
+		if (choice == 4) {// multibrot set
+			xVal = x * 512 + xRangeStart;
+		} else {
+			return 0;
+		}
+		return xVal;
+	}
+
+	public double getyVal(int y, int choice) {
+		// method to show y value's translation to the row
+		double yVal;
+		dataInput(choice);
+		if (choice == 1) {// mandelbrot set
+			yVal = y * 512 + yRangeStart;
+		}
+		if (choice == 2) {// julia set
+			yVal = y * 512 + yRangeStart;
+		}
+		if (choice == 3) {// burning ship set
+			yVal = y * 512 + yRangeStart;
+		}
+		if (choice == 4) {// multibrot set
+			yVal = y * 512 + yRangeStart;
+		} else {
+			return 0;
+		}
+		return yVal;
+	}
+
 	public static void dataInput(int choice) {
+		// method to fill values based on which fractal was chosen
 		if (choice == 1) {
 			// mandelbrot
 			// X-coordinate range from -2.15 to 0.6
@@ -52,6 +95,8 @@ public class EscapeTimeAlgorithm {
 	}
 
 	public static void updateXY(int choice) {
+		// defines the way each function calculates xCalc and yCalc, specific to
+		// each function
 		if (choice == 1) {// mandelbrot update function
 			xTemp = Math.pow(xCalc, 2) - Math.pow(yCalc, 2) + xCurrent;
 			yTemp = 2 * xCalc * yCalc + yCurrent;
@@ -71,6 +116,7 @@ public class EscapeTimeAlgorithm {
 	}
 
 	public int escTimeCoords(double x, double y, int choice) {
+		// method which is used to test the escape time of a single coordinate
 		xCurrent = x;
 		yCurrent = y;
 		xCalc = xCurrent;
@@ -88,7 +134,7 @@ public class EscapeTimeAlgorithm {
 	}
 
 	public static int[][] escTimeCalculator(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
-
+		// method that will return an entire 2d array of escape times
 		int escTimeArray[][] = new int[colAmt][rowAmt];
 		dataInput(choice);
 		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row

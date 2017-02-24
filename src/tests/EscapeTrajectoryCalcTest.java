@@ -14,12 +14,26 @@ public class EscapeTrajectoryCalcTest {
 		// Translate a pixel's row to the associated x-coordinate in the fractal
 		// (1 test per fractal) [4 * 5 points = 20 points]
 
+		// method getxVal takes in the row number, and the choice as to which
+		// fractal you want
+		assertEquals(250, frac.getxVal(250, 1), .01);// mandelbrot
+		assertEquals(250, frac.getxVal(250, 2), .01);// julia
+		assertEquals(250, frac.getxVal(250, 3), .01);// burning ship
+		assertEquals(250, frac.getxVal(250, 4), .01);// multibrot
+
 	}
 
 	@Test
 	public void testColToY() {
 		// Translate a pixel's column to the associated y-coordinate in the
 		// fractal (1 test per fractal) [4 * 5 points = 20 points]
+
+		// method getyVal takes in the column number, and the choice as to which
+		// fractal you want
+		assertEquals(250, frac.getyVal(250, 1), .01);// mandelbrot
+		assertEquals(250, frac.getyVal(250, 2), .01);// julia
+		assertEquals(250, frac.getyVal(250, 3), .01);// burning ship
+		assertEquals(250, frac.getyVal(250, 4), .01);// multibrot
 
 	}
 
