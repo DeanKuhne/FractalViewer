@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import code.EscapeTimeAlgorithm;
 
-public class EscapeTrajectoryCalcTest {
+public class EscapeTimeCalcTest {
 	EscapeTimeAlgorithm frac = new EscapeTimeAlgorithm();
 
 	@Test
