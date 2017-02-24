@@ -12,42 +12,38 @@ public class EscapeTimeAlgorithm {
 	private static double xTemp;
 	private static double yTemp;
 
-	public double getxVal(int x, int choice) {
+	public static double getxVal(int x, int choice) {
 		// method to show x value's translation to the column
 		double xVal;
 		dataInput(choice);
+		double xStep = Math.abs(xRangeStart - xRangeEnd) / 512;// x is row
 		if (choice == 1) {// mandelbrot set
-			xVal = x * 512 + xRangeStart;
-		}
-		if (choice == 2) {// julia set
-			xVal = x * 512 + xRangeStart;
-		}
-		if (choice == 3) {// burning ship set
-			xVal = x * 512 + xRangeStart;
-		}
-		if (choice == 4) {// multibrot set
-			xVal = x * 512 + xRangeStart;
+			xVal = x * xStep + xRangeStart;
+		} else if (choice == 2) {// julia set
+			xVal = x * xStep + xRangeStart;
+		} else if (choice == 3) {// burning ship set
+			xVal = x * xStep + xRangeStart;
+		} else if (choice == 4) {// multibrot set
+			xVal = x * xStep + xRangeStart;
 		} else {
 			return 0;
 		}
 		return xVal;
 	}
 
-	public double getyVal(int y, int choice) {
+	public static double getyVal(int y, int choice) {
 		// method to show y value's translation to the row
 		double yVal;
 		dataInput(choice);
+		double yStep = Math.abs(yRangeStart - yRangeEnd) / 512;// y is column
 		if (choice == 1) {// mandelbrot set
-			yVal = y * 512 + yRangeStart;
-		}
-		if (choice == 2) {// julia set
-			yVal = y * 512 + yRangeStart;
-		}
-		if (choice == 3) {// burning ship set
-			yVal = y * 512 + yRangeStart;
-		}
-		if (choice == 4) {// multibrot set
-			yVal = y * 512 + yRangeStart;
+			yVal = y * yStep + yRangeStart;
+		} else if (choice == 2) {// julia set
+			yVal = y * yStep + yRangeStart;
+		} else if (choice == 3) {// burning ship set
+			yVal = y * yStep + yRangeStart;
+		} else if (choice == 4) {// multibrot set
+			yVal = y * yStep + yRangeStart;
 		} else {
 			return 0;
 		}
