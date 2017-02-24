@@ -16,10 +16,10 @@ public class EscapeTimeCalcTest {
 
 		// method getxVal takes in the row number, and the choice as to which
 		// fractal you want
-		assertEquals(250, frac.getxVal(250, 1), .01);// mandelbrot
-		assertEquals(250, frac.getxVal(250, 2), .01);// julia
-		assertEquals(250, frac.getxVal(250, 3), .01);// burning ship
-		assertEquals(250, frac.getxVal(250, 4), .01);// multibrot
+		assertEquals(-0.807226562499999900, EscapeTimeAlgorithm.getxVal(250, 1), .000001);// mandelbrot
+		assertEquals(-0.039843749999999956, EscapeTimeAlgorithm.getxVal(250, 2), .000001);// julia
+		assertEquals(-1.751171875000000000, EscapeTimeAlgorithm.getxVal(250, 3), .000001);// burning
+		assertEquals(-0.023437500000000000, EscapeTimeAlgorithm.getxVal(250, 4), .000001);// multibrot
 
 	}
 
@@ -30,10 +30,10 @@ public class EscapeTimeCalcTest {
 
 		// method getyVal takes in the column number, and the choice as to which
 		// fractal you want
-		assertEquals(250, frac.getyVal(250, 1), .01);// mandelbrot
-		assertEquals(250, frac.getyVal(250, 2), .01);// julia
-		assertEquals(250, frac.getyVal(250, 3), .01);// burning ship
-		assertEquals(250, frac.getyVal(250, 4), .01);// multibrot
+		assertEquals(-0.030468750000000044, EscapeTimeAlgorithm.getyVal(250, 1), .000001);// mandelbrot
+		assertEquals(-0.023437500000000000, EscapeTimeAlgorithm.getyVal(250, 2), .000001);// julia
+		assertEquals(-0.028730468749999995, EscapeTimeAlgorithm.getyVal(250, 3), .000001);// burning
+		assertEquals(-0.030468750000000044, EscapeTimeAlgorithm.getyVal(250, 4), .000001);// multibrot
 
 	}
 
