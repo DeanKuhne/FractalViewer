@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import code.EscapeTimeAlgorithm;
-import code.coordCalc;
 
 public class EscapeTrajectoryCalcTest {
 	EscapeTimeAlgorithm frac = new EscapeTimeAlgorithm();
