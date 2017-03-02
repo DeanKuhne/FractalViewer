@@ -31,9 +31,6 @@ public class EscapeTimeCalcTest<E> {
 
 	@Test
 	public void testColToY() {
-		E[] asdfs = new E[10]();
-		
-		
 		Set<String> asdfasdf =  (HashSet<String>) fun();
 		Set<String> names = new HashSet<String>();
 		names = new TreeSet<String>();
