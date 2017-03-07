@@ -2,11 +2,17 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.junit.Test;
 
 import code.EscapeTimeAlgorithm;
 
-public class EscapeTimeCalcTest {
+public class EscapeTimeCalcTest<E> {
 	EscapeTimeAlgorithm frac = new EscapeTimeAlgorithm();
 
 	@Test
@@ -25,6 +31,9 @@ public class EscapeTimeCalcTest {
 
 	@Test
 	public void testColToY() {
+		Set<String> asdfasdf =  (HashSet<String>) fun();
+		Set<String> names = new HashSet<String>();
+		names = new TreeSet<String>();
 		// Translate a pixel's column to the associated y-coordinate in the
 		// fractal (1 test per fractal) [4 * 5 points = 20 points]
 
@@ -35,6 +44,12 @@ public class EscapeTimeCalcTest {
 		assertEquals(-0.028730468749999995, EscapeTimeAlgorithm.getyVal(250, 3), .000001);// burning
 		assertEquals(-0.030468750000000044, EscapeTimeAlgorithm.getyVal(250, 4), .000001);// multibrot
 
+	}
+	
+	
+	public static Set<String> fun() {
+//		return new HashSet<String>();
+		return new TreeSet<String>();
 	}
 
 	@Test
