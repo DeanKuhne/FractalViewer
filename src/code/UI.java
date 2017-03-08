@@ -1,3 +1,4 @@
+
 package code;
 import java.awt.image.IndexColorModel;
 import java.lang.Enum;
@@ -5,7 +6,7 @@ import java.lang.Object;
 import edu.buffalo.fractal.FractalPanel;
 import edu.buffalo.fractal.FractalPanel.SaveFormat;;
 
-public class UI {
+public class UI extends javax.swing.JFrame {
 	public static FractalPanel _panel = new FractalPanel();
 	public static EscapeTimeAlgorithm _escape = new EscapeTimeAlgorithm();
 	public static IndexColorModel indexColor;
