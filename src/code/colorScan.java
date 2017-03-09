@@ -19,6 +19,7 @@ public class colorScan {
 	      reds[i] = (byte) ((rgb & 0xFF0000) >> 16);
 	      greens[i] = (byte) ((rgb & 0xFF00) >> 8);
 	      blues[i] = (byte) (rgb & 0xFF);
+	      
 	    }
 	    IndexColorModel retVal = new IndexColorModel(8, reds.length, reds, greens, blues);
 	    return retVal;
