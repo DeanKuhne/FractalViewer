@@ -5,6 +5,7 @@ import javax.swing.*;
 public class UI extends javax.swing.JFrame {
 	public UI() {
 		initComponents();
+		
 	}
 
 	private void initComponents() {
