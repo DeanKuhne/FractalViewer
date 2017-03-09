@@ -36,6 +36,7 @@ public class UI extends javax.swing.JFrame {
 		_panel.setIndexColorModel(indexColor);
 		
 		
+		
 	}
 	
 	public static void main(String[] args){
