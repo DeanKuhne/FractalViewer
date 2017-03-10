@@ -31,7 +31,6 @@ public class EscapeTimeCalcTest<E> {
 
 	@Test
 	public void testColToY() {
-		Set<String> asdfasdf =  (HashSet<String>) fun();
 		Set<String> names = new HashSet<String>();
 		names = new TreeSet<String>();
 		// Translate a pixel's column to the associated y-coordinate in the
@@ -47,10 +46,7 @@ public class EscapeTimeCalcTest<E> {
 	}
 	
 	
-	public static Set<String> fun() {
-//		return new HashSet<String>();
-		return new TreeSet<String>();
-	}
+
 
 	@Test
 	public void testNeverEscDist() {

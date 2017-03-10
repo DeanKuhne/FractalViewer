@@ -1,1 +1,12 @@
-//tell TAs the way to run our program to verify the work on GUI
+//tell TAs the way to run our program to verify the work on G
+
+colorScan Class :
+There are 4 methods in the colorScan class, each method can create a new index color model by inputing 
+the number of color. To create new color model, we used RGB model, and modifying the value of red, blue and 
+green ( which are all ranges from 0 to 255), and combining to create the color for a specific pixel. The number of color
+will be used as the size of arrays of red, blue and green. By looping those arrays, a certain value will be created and
+transfered to bytes. 
+To instantiate the index color model, we input 8 bits, create the size as large as the number of color, and RGB parameters.
+
+For createRedAlphaColorModel method, the value of alpha, which is ranging from 0.0 to 1.0 is added, and combined 
+to form a new method. The final input parameters to create index color model will add alpha array.
