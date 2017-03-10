@@ -12,28 +12,32 @@ public class UI extends javax.swing.JFrame {
 	public static FractalPanel _panel = new FractalPanel();
 	public static EscapeTimeAlgorithm _escape = new EscapeTimeAlgorithm();
 	public static IndexColorModel _indexColor;
+	public static int _escTime = 2;
+	public static int numColors = 255;
 	
 	public UI(){
 		initComponents();
-		int[][] mandarr = _escape.escTimeCalculator(512,512,2,255,1);
-		int[][] jarr = _escape.escTimeCalculator(512,512,2,255,2);
-		int[][] bsarr = _escape.escTimeCalculator(512,512,2,255,3);
-		int[][] multiarr = _escape.escTimeCalculator(512,512,2,255,4);
+		int[][] mandarr = _escape.escTimeCalculator(512,512,_escTime,255,1);
+		int[][] jarr = _escape.escTimeCalculator(512,512,_escTime,255,2);
+		int[][] bsarr = _escape.escTimeCalculator(512,512,_escTime,255,3);
+		int[][] multiarr = _escape.escTimeCalculator(512,512,_escTime,255,4);
 		
+		_indexColor = colorScan.createRedAlphaColorModel(numColors + 1);
+		_panel.setIndexColorModel(_indexColor);
 		_panel.updateImage(mandarr);
-		_panel.saveImage(PNG, mandarr);
+	//	_panel.saveImage(PNG, mandarr);
 		
 		
 		_panel.updateImage(jarr);
-		_panel.saveImage(PNG,jarr);
+//		_panel.saveImage(PNG,jarr);
 		
 		_panel.updateImage(bsarr);
-		_panel.saveImage(PNG, bsarr);
+//		_panel.saveImage(PNG, bsarr);
 		
 		_panel.updateImage(multiarr);
-		_panel.saveImage(PNG, multiarr);
+//		_panel.saveImage(PNG, multiarr);
 		
-		_panel.setIndexColorModel(indexColor);
+		
 		
 		
 		
