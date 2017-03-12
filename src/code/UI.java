@@ -1,6 +1,7 @@
 
 
 package code;
+import listener.*;
 import javax.swing.*;
 import java.awt.image.IndexColorModel;
 import java.lang.Enum;
@@ -46,7 +47,10 @@ public class UI extends javax.swing.JFrame {
 	public static void main(String[] args){
 		
 	}
-	private void initComponents() {
+	public void initComponents() {
+		
+		JFrame window = new JFrame();
+		
 		//JmenuBar->JMenu->JMenuItem
 		JMenuBar menu = new JMenuBar();
 		JMenu fileLoc = new JMenu("Choose File Location");
@@ -70,8 +74,8 @@ public class UI extends javax.swing.JFrame {
 		fracChoice.add(fracChoice4);
 		menu.add(fracChoice);//adding JMenu to Menu Bar
 		JMenu colorScheme = new JMenu("Select Color Scheme");
-		JMenuItem colorScheme1 = new JMenuItem("TODO");
-		JMenuItem colorScheme2 = new JMenuItem("TODO");
+		JMenuItem colorScheme1 = new JMenuItem("red alpha");
+		JMenuItem colorScheme2 = new JMenuItem("rainbow");
 		JMenuItem colorScheme3 = new JMenuItem("TODO");
 		JMenuItem colorScheme4 = new JMenuItem("TODO");
 		colorScheme.add(colorScheme1);
@@ -81,9 +85,15 @@ public class UI extends javax.swing.JFrame {
 		menu.add(colorScheme);//adding JMenu to Menu Bar
 		JMenuItem update = new JMenuItem("Update Fractal");
 		JMenuItem close = new JMenuItem("Exit Program");
+		close.addActionListener(new closeListener());
 		menu.add(update);//adding Menu Item to Menu Bar
 		menu.add(close);//adding Menu Item to Menu Bar
 
+		window.setJMenuBar(menu);
+		window.add(_panel);
+		window.pack();
+		window.setVisible(true);
+		window.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
 	}
