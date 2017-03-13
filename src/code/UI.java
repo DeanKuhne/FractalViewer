@@ -55,6 +55,7 @@ public class UI extends javax.swing.JFrame {
 
 
 package code;
+import listener.*;
 import javax.swing.*;
 import java.awt.image.IndexColorModel;
 import java.lang.Enum;
@@ -66,28 +67,32 @@ public class UI extends javax.swing.JFrame {
 	public static FractalPanel _panel = new FractalPanel();
 	public static EscapeTimeAlgorithm _escape = new EscapeTimeAlgorithm();
 	public static IndexColorModel _indexColor;
+	public static int _escTime = 2;
+	public static int numColors = 255;
 	
 	public UI(){
 		initComponents();
-		int[][] mandarr = _escape.escTimeCalculator(512,512,2,255,1);
-		int[][] jarr = _escape.escTimeCalculator(512,512,2,255,2);
-		int[][] bsarr = _escape.escTimeCalculator(512,512,2,255,3);
-		int[][] multiarr = _escape.escTimeCalculator(512,512,2,255,4);
+		int[][] mandarr = _escape.escTimeCalculator(512,512,_escTime,255,1);
+		int[][] jarr = _escape.escTimeCalculator(512,512,_escTime,255,2);
+		int[][] bsarr = _escape.escTimeCalculator(512,512,_escTime,255,3);
+		int[][] multiarr = _escape.escTimeCalculator(512,512,_escTime,255,4);
 		
+		_indexColor = colorScan.createRedAlphaColorModel(numColors + 1);
+		_panel.setIndexColorModel(_indexColor);
 		_panel.updateImage(mandarr);
-		_panel.saveImage(PNG, mandarr);
+	//	_panel.saveImage(PNG, mandarr);
 		
 		
 		_panel.updateImage(jarr);
-		_panel.saveImage(PNG,jarr);
+//		_panel.saveImage(PNG,jarr);
 		
 		_panel.updateImage(bsarr);
-		_panel.saveImage(PNG, bsarr);
+//		_panel.saveImage(PNG, bsarr);
 		
 		_panel.updateImage(multiarr);
-		_panel.saveImage(PNG, multiarr);
+//		_panel.saveImage(PNG, multiarr);
 		
-		_panel.setIndexColorModel(indexColor);
+		
 		
 		
 		
@@ -96,7 +101,10 @@ public class UI extends javax.swing.JFrame {
 	public static void main(String[] args){
 		
 	}
-	private void initComponents() {
+	public void initComponents() {
+		
+		JFrame window = new JFrame();
+		
 		//JmenuBar->JMenu->JMenuItem
 		JMenuBar menu = new JMenuBar();
 		JMenu fileLoc = new JMenu("Choose File Location");
@@ -120,8 +128,8 @@ public class UI extends javax.swing.JFrame {
 		fracChoice.add(fracChoice4);
 		menu.add(fracChoice);//adding JMenu to Menu Bar
 		JMenu colorScheme = new JMenu("Select Color Scheme");
-		JMenuItem colorScheme1 = new JMenuItem("TODO");
-		JMenuItem colorScheme2 = new JMenuItem("TODO");
+		JMenuItem colorScheme1 = new JMenuItem("red alpha");
+		JMenuItem colorScheme2 = new JMenuItem("rainbow");
 		JMenuItem colorScheme3 = new JMenuItem("TODO");
 		JMenuItem colorScheme4 = new JMenuItem("TODO");
 		colorScheme.add(colorScheme1);
@@ -131,9 +139,15 @@ public class UI extends javax.swing.JFrame {
 		menu.add(colorScheme);//adding JMenu to Menu Bar
 		JMenuItem update = new JMenuItem("Update Fractal");
 		JMenuItem close = new JMenuItem("Exit Program");
+		close.addActionListener(new closeListener());
 		menu.add(update);//adding Menu Item to Menu Bar
 		menu.add(close);//adding Menu Item to Menu Bar
 
+		window.setJMenuBar(menu);
+		window.add(_panel);
+		window.pack();
+		window.setVisible(true);
+		window.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
 	}

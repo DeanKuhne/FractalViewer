@@ -1,6 +1,11 @@
 package code;
 
 public class UIApplication {
-	UI ui = new UI();
+//	static UI ui = new UI();
+	
+	public static void main(String[] args){
+		 UI ui = new UI();
+	}
+
 
 }
