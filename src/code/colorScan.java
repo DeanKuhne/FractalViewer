@@ -25,7 +25,6 @@ public class colorScan {
 	    return retVal;
 	  }
 
-	 
 	  public static IndexColorModel createRedAlphaColorModel(int numColors) {
 	    byte[] reds = new byte[numColors];
 	    byte[] greens = new byte[numColors];
@@ -40,12 +39,4 @@ public class colorScan {
 	    IndexColorModel retVal = new IndexColorModel(8, reds.length, reds, greens, blues,alphas);//return the indexmodel with parameters of 8 bits, size of numColors, and 4 arrays
 	    return retVal;
 	  }
-	  
-	
-	  
-	  
-		}
-	
-
-		
-
+}
