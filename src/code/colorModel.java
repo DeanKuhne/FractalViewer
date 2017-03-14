@@ -54,17 +54,18 @@ public class colorModel {
 	  }
 	  
 	  public static IndexColorModle ceateBluesAlphaColorModel(int numColors){
-		  byte[] reds new byte[numColors];
+		  byte[] reds = new byte[numColors];
 		  byte[] greens = new byte[numColors];
 		  byte[] blues = new byte[numColors];
-		  byte[] alphas = new byte[numColors];
-		  for(int i = 0; i < reds.length - 1; i++){
+		  byte[] alphas = new byte[numColors]; /** create 4 arrays for color model parameters, adn the length of arrays will equasl to the number of color**/
+		  for(int i = 0; i < reds.length - 1; i++){ /** loop the all 4 arrays and input the value of parameters**/
 			  reds[i] = 0;
 			  greens[i] = 0;
 			  blues[i] = (byte) ((Math.log10(i) / Math.log10(blues.length)) * 256);
 			  alphas[i] = (byte) ((Math.log10(i) / Math.log10(alphas.length)) * 1);
 		  }
 		  IndexColorModel retVal = new IndexColorModel(8, reds.length, reds, greens, blues, alphas);
+		  return retVal;
 	  }
 }
 	
