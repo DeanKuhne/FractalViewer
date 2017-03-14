@@ -1,55 +1,52 @@
 
 
 package code;
+import javax.swing.JFrame;
 import listener.*;
 import javax.swing.*;
+
+import java.awt.event.ActionListener;
 import java.awt.image.IndexColorModel;
 import java.lang.Enum;
 import java.lang.Object;
 import edu.buffalo.fractal.FractalPanel;
 import edu.buffalo.fractal.FractalPanel.SaveFormat;;
 
-public class UI extends javax.swing.JFrame {
+public class UI {
 	public static FractalPanel _panel = new FractalPanel();
 	public static EscapeTimeAlgorithm _escape = new EscapeTimeAlgorithm();
 	public static IndexColorModel _indexColor;
 	public static int _escTime = 2;
-	public static int numColors = 255;
+	public static int _numColors = 255;
+	public static int[][] _currentArr = _escape.escTimeCalculator(512,512,_escTime,255,1);
+	public static ActionListener _changeToRedAlpha;
+	public static ActionListener _changeToRainbow;
 	
 	public UI(){
-		initComponents();
+		
 		int[][] mandarr = _escape.escTimeCalculator(512,512,_escTime,255,1);
 		int[][] jarr = _escape.escTimeCalculator(512,512,_escTime,255,2);
 		int[][] bsarr = _escape.escTimeCalculator(512,512,_escTime,255,3);
 		int[][] multiarr = _escape.escTimeCalculator(512,512,_escTime,255,4);
 		
-		_indexColor = colorScan.createRedAlphaColorModel(numColors + 1);
+		_indexColor = colorScan.createRedAlphaColorModel(_numColors + 1);
 		_panel.setIndexColorModel(_indexColor);
 		_panel.updateImage(mandarr);
 	//	_panel.saveImage(PNG, mandarr);
 		
 		
-		_panel.updateImage(jarr);
+		//_panel.updateImage(jarr);
 //		_panel.saveImage(PNG,jarr);
 		
-		_panel.updateImage(bsarr);
+	//	_panel.updateImage(bsarr);
 //		_panel.saveImage(PNG, bsarr);
 		
-		_panel.updateImage(multiarr);
+	//	_panel.updateImage(multiarr);
 //		_panel.saveImage(PNG, multiarr);
 		
+		_currentArr = multiarr;
 		
-		
-		
-		
-	}
-	
-	public static void main(String[] args){
-		
-	}
-	public void initComponents() {
-		
-		JFrame window = new JFrame();
+		JFrame window = new JFrame();//instantiating JFrame window
 		
 		//JmenuBar->JMenu->JMenuItem
 		JMenuBar menu = new JMenuBar();
@@ -65,19 +62,34 @@ public class UI extends javax.swing.JFrame {
 		menu.add(fileLoc);//adding JMenu to Menu Bar
 		JMenu fracChoice = new JMenu("Select a Fractal");
 		JMenuItem fracChoice1 = new JMenuItem("Mandelbrot");
+		fracChoice1.addActionListener(new changeFractal(_panel,mandarr));
 		JMenuItem fracChoice2 = new JMenuItem("Julia Set");
+		fracChoice2.addActionListener(new changeFractal(_panel,jarr));
 		JMenuItem fracChoice3 = new JMenuItem("Burning Ship");
+		fracChoice3.addActionListener(new changeFractal(_panel,bsarr));
 		JMenuItem fracChoice4 = new JMenuItem("Multibrot");
+		fracChoice4.addActionListener(new changeFractal(_panel,multiarr));
 		fracChoice.add(fracChoice1);
 		fracChoice.add(fracChoice2);
 		fracChoice.add(fracChoice3);
 		fracChoice.add(fracChoice4);
+		
+		
 		menu.add(fracChoice);//adding JMenu to Menu Bar
 		JMenu colorScheme = new JMenu("Select Color Scheme");
 		JMenuItem colorScheme1 = new JMenuItem("red alpha");
+		//_changeToRedAlpha = new changeColorModel(_panel,colorScan.createRedAlphaColorModel(_numColors + 1),_currentArr);
+		_changeToRedAlpha = new changeColorModel(_panel,colorScan.createRedAlphaColorModel(256),_currentArr);
+		colorScheme1.addActionListener(_changeToRedAlpha);
+		
 		JMenuItem colorScheme2 = new JMenuItem("rainbow");
+		_changeToRainbow = new changeColorModel(_panel,colorScan.createRedAlphaColorModel(_numColors + 1),_currentArr);
+		colorScheme2.addActionListener(_changeToRainbow);
+		
 		JMenuItem colorScheme3 = new JMenuItem("TODO");
 		JMenuItem colorScheme4 = new JMenuItem("TODO");
+		
+		
 		colorScheme.add(colorScheme1);
 		colorScheme.add(colorScheme2);
 		colorScheme.add(colorScheme3);
@@ -85,17 +97,17 @@ public class UI extends javax.swing.JFrame {
 		menu.add(colorScheme);//adding JMenu to Menu Bar
 		JMenuItem update = new JMenuItem("Update Fractal");
 		JMenuItem close = new JMenuItem("Exit Program");
-		close.addActionListener(new closeListener());
+		close.addActionListener(new closeListener());//adding action listener to JMenuItem close
 		menu.add(update);//adding Menu Item to Menu Bar
 		menu.add(close);//adding Menu Item to Menu Bar
 
-		window.setJMenuBar(menu);
-		window.add(_panel);
-		window.pack();
-		window.setVisible(true);
-		window.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
+		window.setJMenuBar(menu);//add all JMenuBar to the JFrame
+		window.add(_panel);//add fractal panel to JFrame
+		window.pack();//set size of JFrame automatically
+		window.setVisible(true);//set JFrame visible
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//close when click cross button
+		
 	}
+	
 
 }

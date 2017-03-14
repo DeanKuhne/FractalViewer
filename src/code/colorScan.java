@@ -37,8 +37,8 @@ public class colorScan {
 	      blues[i] = 0;
 	      alphas[i] = (byte)((Math.log10(i) / Math.log10(reds.length)) * 1);//the range of alpha is from 0.0 to 1.0
 	    }
-	    IndexColorModel retVal = new IndexColorModel(8, reds.length, reds, greens, blues,alphas);//return the indexmodel with parameters of 8 bits, size of numColors, and 4 arrays
-	    return retVal;
+	    IndexColorModel redAlpha = new IndexColorModel(8, reds.length, reds, greens, blues,alphas);//return the indexmodel with parameters of 8 bits, size of numColors, and 4 arrays
+	    return redAlpha;
 	  }
 	  
 	
