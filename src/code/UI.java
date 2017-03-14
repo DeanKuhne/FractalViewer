@@ -76,6 +76,8 @@ public class UI {
 		
 		
 		menu.add(fracChoice);//adding JMenu to Menu Bar
+		
+		
 		JMenu colorScheme = new JMenu("Select Color Scheme");
 		JMenuItem colorScheme1 = new JMenuItem("red alpha");
 		//_changeToRedAlpha = new changeColorModel(_panel,colorScan.createRedAlphaColorModel(_numColors + 1),_currentArr);
