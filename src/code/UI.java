@@ -20,6 +20,7 @@ public class UI extends javax.swing.JFrame {
 	public int[][] array;
 	public int escDist = 4;
 	public FractalPanel _display;
+	public colorModel _color;
 	public EscapeTimeAlgorithm _fractal;
 	private javax.swing.JMenu colorScheme;
 	private javax.swing.JMenuItem colorScheme1;
@@ -27,11 +28,6 @@ public class UI extends javax.swing.JFrame {
 	private javax.swing.JMenuItem colorScheme3;
 	private javax.swing.JMenuItem colorScheme4;
 	private javax.swing.JMenu escTime;
-	// private javax.swing.JMenu fileLoc;
-	// private javax.swing.JMenuItem fileLoc1;
-	// private javax.swing.JMenuItem fileLoc2;
-	// private javax.swing.JMenuItem fileLoc3;
-	// private javax.swing.JMenuItem fileLoc4;
 	private javax.swing.JMenu fracChoice;
 	private javax.swing.JMenuItem fracChoice1;
 	private javax.swing.JMenuItem fracChoice2;
@@ -44,19 +40,17 @@ public class UI extends javax.swing.JFrame {
 		initComponents();
 		fractalOut.add(_display);
 		array = _fractal.escTimeCalculator(512, 512, escDist, 255, 1);
+		//this is here so there is a default
+		//fractal displayed upon start
 		_display.updateImage(array);
 	}
 
 	private void initComponents() {
+		_color = new ColorModel();
 		_display = new FractalPanel();
 		_fractal = new EscapeTimeAlgorithm();
 		fractalOut = new javax.swing.JPanel();
 		jMenuBar1 = new javax.swing.JMenuBar();
-		// fileLoc = new javax.swing.JMenu();
-		// fileLoc1 = new javax.swing.JMenuItem();
-		// fileLoc2 = new javax.swing.JMenuItem();
-		// fileLoc3 = new javax.swing.JMenuItem();
-		// fileLoc4 = new javax.swing.JMenuItem();
 		fracChoice = new javax.swing.JMenu();
 		fracChoice1 = new javax.swing.JMenuItem();
 		fracChoice2 = new javax.swing.JMenuItem();
@@ -201,8 +195,8 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme1actionPerformed(java.awt.event.ActionEvent evt) {
-
 		_display.updateImage(array);
+		_display.setIndexColorModel(_color.methodName);
 		// COLOR SCHEME 1
 	}
 

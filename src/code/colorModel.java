@@ -5,10 +5,7 @@ import java.awt.Color;
 import java.awt.image.IndexColorModel;
 
 
-public class colorScan {
-	public colorScan(){
-		
-	}
+public class colorModel {
 	
 	public static IndexColorModel createRainbowColorModel(int numColors) {
 	    byte[] reds = new byte[numColors];
