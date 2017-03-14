@@ -26,13 +26,11 @@ public class EscapeTimeCalcTest<E> {
 		assertEquals(-0.039843749999999956, EscapeTimeAlgorithm.getxVal(250, 2), .000001);// julia
 		assertEquals(-1.751171875000000000, EscapeTimeAlgorithm.getxVal(250, 3), .000001);// burning
 		assertEquals(-0.023437500000000000, EscapeTimeAlgorithm.getxVal(250, 4), .000001);// multibrot
-		
+
 	}
 
 	@Test
 	public void testColToY() {
-		Set<String> names = new HashSet<String>();
-		names = new TreeSet<String>();
 		// Translate a pixel's column to the associated y-coordinate in the
 		// fractal (1 test per fractal) [4 * 5 points = 20 points]
 
@@ -46,7 +44,10 @@ public class EscapeTimeCalcTest<E> {
 	}
 	
 	
-
+	public static Set<String> fun() {
+//		return new HashSet<String>();
+		return new TreeSet<String>();
+	}
 
 	@Test
 	public void testNeverEscDist() {
@@ -74,7 +75,7 @@ public class EscapeTimeCalcTest<E> {
 	public void testBurnShipEscDist() {
 		// Calculates that none of the pixels in the Burning Ship set have an
 		// escape time of 0 or 1 [8 points]
-		int[][] array = EscapeTimeAlgorithm.escTimeCalculator(512, 512, 4, 255, 3);
+		int[][] array = frac.escTimeCalculator(512, 512, 4, 255, 3);
 		for (int row = 0; row < 512; row++) {
 			for (int col = 0; col < 512; col++) {
 				assertTrue(array[row][col] != 0 && array[row][col] != 1);
@@ -88,13 +89,13 @@ public class EscapeTimeCalcTest<E> {
 		// The method called to calculate the fractal returns a 2-d array with
 		// 512 rows and 512 columns (1 test per fractal) [4 * 2 points = 8
 		// points]
-		int[][] mand = EscapeTimeAlgorithm.escTimeCalculator(512, 512, 4, 255, 1);
+		int[][] mand = frac.escTimeCalculator(512, 512, 4, 255, 1);
 		assertTrue(mand.length == 512 && mand[0].length == 512);
-		int[][] juli = EscapeTimeAlgorithm.escTimeCalculator(512, 512, 4, 255, 2);
+		int[][] juli = frac.escTimeCalculator(512, 512, 4, 255, 2);
 		assertTrue(juli.length == 512 && juli[0].length == 512);
-		int[][] burn = EscapeTimeAlgorithm.escTimeCalculator(512, 512, 4, 255, 3);
+		int[][] burn = frac.escTimeCalculator(512, 512, 4, 255, 3);
 		assertTrue(burn.length == 512 && burn[0].length == 512);
-		int[][] mult = EscapeTimeAlgorithm.escTimeCalculator(512, 512, 4, 255, 4);
+		int[][] mult = frac.escTimeCalculator(512, 512, 4, 255, 4);
 		assertTrue(mult.length == 512 && mult[0].length == 512);
 
 	}
