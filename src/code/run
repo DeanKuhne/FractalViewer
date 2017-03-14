@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 To run, run UIApplication as main
-=======
+====================================================
 //tell TAs the way to run our program to verify the work on G
 
 colorScan Class :
@@ -13,4 +12,3 @@ To instantiate the index color model, we input 8 bits, create the size as large 
 
 For createRedAlphaColorModel method, the value of alpha, which is ranging from 0.0 to 1.0 is added, and combined 
 to form a new method. The final input parameters to create index color model will add alpha array.
->>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
