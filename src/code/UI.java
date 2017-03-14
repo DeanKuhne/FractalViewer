@@ -63,18 +63,11 @@ import javax.swing.JOptionPane;
 
 import edu.buffalo.fractal.FractalPanel;
 
-/*
- * To change this license header, choose License Headers in Project Praoperties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author dekuh
  */
 public class UI extends javax.swing.JFrame {
-	// JPanel.add(instance of FractalPanel
-
 	private static final long serialVersionUID = 1L;
 	public int[][] array;
 	public int escDist = 4;
@@ -99,8 +92,8 @@ public class UI extends javax.swing.JFrame {
 		initComponents();
 		fractalOut.add(_display);
 		array = _fractal.escTimeCalculator(512, 512, escDist, 255, 1);
-		//this is here so there is a default
-		//fractal displayed upon start
+		// this is here so there is a default
+		// fractal displayed upon start
 		_display.updateImage(array);
 	}
 
@@ -133,6 +126,7 @@ public class UI extends javax.swing.JFrame {
 
 		escTime.setText("Escape Time");
 		escTime.addMouseListener(new java.awt.event.MouseAdapter() {
+                        @Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				escTimeMouseClicked(evt);
 			}
@@ -143,6 +137,7 @@ public class UI extends javax.swing.JFrame {
 
 		fracChoice1.setText("Mandelbrot");
 		fracChoice1.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				fracChoice1ActionPerformed(evt);
 			}
@@ -151,6 +146,7 @@ public class UI extends javax.swing.JFrame {
 
 		fracChoice2.setText("Julia Set");
 		fracChoice2.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				fracChoice2ActionPerformed(evt);
 			}
@@ -160,6 +156,7 @@ public class UI extends javax.swing.JFrame {
 		fracChoice3.setText("Burning Ship");
 
 		fracChoice3.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				fracChoice3ActionPerformed(evt);
 			}
@@ -169,6 +166,7 @@ public class UI extends javax.swing.JFrame {
 		fracChoice4.setText("Multibrot");
 
 		fracChoice4.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				fracChoice4ActionPerformed(evt);
 			}
@@ -181,6 +179,7 @@ public class UI extends javax.swing.JFrame {
 
 		colorScheme1.setText("TODO");
 		colorScheme1.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				colorScheme1actionPerformed(evt);
 			}
@@ -189,6 +188,7 @@ public class UI extends javax.swing.JFrame {
 
 		colorScheme2.setText("TODO");
 		colorScheme2.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				colorScheme2actionPerformed(evt);
 			}
@@ -197,6 +197,7 @@ public class UI extends javax.swing.JFrame {
 
 		colorScheme3.setText("TODO");
 		colorScheme3.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				colorScheme3actionPerformed(evt);
 			}
@@ -205,6 +206,7 @@ public class UI extends javax.swing.JFrame {
 
 		colorScheme4.setText("TODO");
 		colorScheme4.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				colorScheme4actionPerformed(evt);
 			}
@@ -255,7 +257,7 @@ public class UI extends javax.swing.JFrame {
 
 	private void colorScheme1actionPerformed(java.awt.event.ActionEvent evt) {
 		_display.updateImage(array);
-		_display.setIndexColorModel(_color.methodName);
+		_display.setIndexColorModel(_color.GhostColorModel(256));
 		// COLOR SCHEME 1
 	}
 
@@ -309,19 +311,16 @@ public class UI extends javax.swing.JFrame {
 					break;
 				}
 			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
 			java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
+            // </editor-fold>
+            
 		// </editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
 			public void run() {
 				new UI().setVisible(true);
 			}
