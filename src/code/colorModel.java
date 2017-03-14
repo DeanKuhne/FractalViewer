@@ -61,11 +61,11 @@ public class colorModel {
 		  for(int i = 0; i < reds.length - 1; i++){ /** loop the all 4 arrays and input the value of parameters**/
 			  reds[i] = 0;
 			  greens[i] = 0;
-			  blues[i] = (byte) ((Math.log10(i) / Math.log10(blues.length)) * 256);
-			  alphas[i] = (byte) ((Math.log10(i) / Math.log10(alphas.length)) * 1);
+			  blues[i] = (byte) ((Math.log10(i) / Math.log10(blues.length)) * 256); /** the range of blue is from 0 to 255**/
+			  alphas[i] = (byte) ((Math.log10(i) / Math.log10(alphas.length)) * 1); /** the range of alpha is from 0.0 to 1.0**/
 		  }
-		  IndexColorModel retVal = new IndexColorModel(8, reds.length, reds, greens, blues, alphas);
-		  return retVal;
+		  IndexColorModel retVal = new IndexColorModel(8, reds.length, reds, greens, blues, alphas); 
+		  return retVal; /** return the indexmodel with parameters of 8 bits, size of numColors, and 4 arrays**/
 	  }
 }
 	
