@@ -26,11 +26,16 @@ public class EscapeTimeCalcTest<E> {
 		assertEquals(-0.039843749999999956, EscapeTimeAlgorithm.getxVal(250, 2), .000001);// julia
 		assertEquals(-1.751171875000000000, EscapeTimeAlgorithm.getxVal(250, 3), .000001);// burning
 		assertEquals(-0.023437500000000000, EscapeTimeAlgorithm.getxVal(250, 4), .000001);// multibrot
-
+		
 	}
 
 	@Test
 	public void testColToY() {
+<<<<<<< HEAD
+=======
+		Set<String> names = new HashSet<String>();
+		names = new TreeSet<String>();
+>>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
 		// Translate a pixel's column to the associated y-coordinate in the
 		// fractal (1 test per fractal) [4 * 5 points = 20 points]
 
@@ -44,10 +49,7 @@ public class EscapeTimeCalcTest<E> {
 	}
 	
 	
-	public static Set<String> fun() {
-//		return new HashSet<String>();
-		return new TreeSet<String>();
-	}
+
 
 	@Test
 	public void testNeverEscDist() {
