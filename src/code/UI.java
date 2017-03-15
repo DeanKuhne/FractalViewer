@@ -582,18 +582,18 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme1actionPerformed(java.awt.event.ActionEvent evt) {
-		_display.updateImage(array);
 		_display.setIndexColorModel(_color.GhostColorModel(256));
+		_display.updateImage(array);
 	}
 
 	private void colorScheme2actionPerformed(java.awt.event.ActionEvent evt) {
-		_display.updateImage(array);
 		_display.setIndexColorModel(_color.GreenscaleColorModel(256));
+		_display.updateImage(array);
 	}
 
 	private void colorScheme3actionPerformed(java.awt.event.ActionEvent evt) {
-		_display.updateImage(array);
 		_display.setIndexColorModel(_color.BluescaleColorModel(256));
+		_display.updateImage(array);
 	}
 
 	private void closeActionPerformed(java.awt.event.ActionEvent evt) {
@@ -601,8 +601,8 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme4actionPerformed(java.awt.event.ActionEvent evt) {
-		_display.updateImage(array);
 		_display.setIndexColorModel(_color.RedscaleColorModel(256));
+		_display.updateImage(array);
 	}
 
 	private void escTimeMouseClicked(java.awt.event.MouseEvent evt) {
