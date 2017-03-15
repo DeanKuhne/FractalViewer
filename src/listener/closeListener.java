@@ -9,5 +9,4 @@ public class closeListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		System.exit(0);
 	}
-
 }
