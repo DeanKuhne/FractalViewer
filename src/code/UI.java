@@ -582,6 +582,7 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme1actionPerformed(java.awt.event.ActionEvent evt) {
+		
 		_display.setIndexColorModel(_color.GhostColorModel(256));
 		_display.updateImage(array);
 	}
