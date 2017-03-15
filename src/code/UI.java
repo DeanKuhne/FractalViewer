@@ -1,62 +1,3 @@
-<<<<<<< HEAD
-package code;
-
-import javax.swing.*;
-
-public class UI extends javax.swing.JFrame {
-	public UI() {
-		initComponents();
-		
-	}
-
-	private void initComponents() {
-		//JmenuBar->JMenu->JMenuItem
-		JMenuBar menu = new JMenuBar();
-		JMenu fileLoc = new JMenu("Choose File Location");
-		JMenuItem fileLoc1 = new JMenuItem("TODO");
-		JMenuItem fileLoc2 = new JMenuItem("TODO");
-		JMenuItem fileLoc3 = new JMenuItem("TODO");
-		JMenuItem fileLoc4 = new JMenuItem("TODO");
-		fileLoc.add(fileLoc1);
-		fileLoc.add(fileLoc2);
-		fileLoc.add(fileLoc3);
-		fileLoc.add(fileLoc4);
-		menu.add(fileLoc);//adding JMenu to Menu Bar
-		JMenu fracChoice = new JMenu("Select a Fractal");
-		JMenuItem fracChoice1 = new JMenuItem("Mandelbrot");
-		JMenuItem fracChoice2 = new JMenuItem("Julia Set");
-		JMenuItem fracChoice3 = new JMenuItem("Burning Ship");
-		JMenuItem fracChoice4 = new JMenuItem("Multibrot");
-		fracChoice.add(fracChoice1);
-		fracChoice.add(fracChoice2);
-		fracChoice.add(fracChoice3);
-		fracChoice.add(fracChoice4);
-		menu.add(fracChoice);//adding JMenu to Menu Bar
-		JMenu colorScheme = new JMenu("Select Color Scheme");
-		JMenuItem colorScheme1 = new JMenuItem("TODO");
-		JMenuItem colorScheme2 = new JMenuItem("TODO");
-		JMenuItem colorScheme3 = new JMenuItem("TODO");
-		JMenuItem colorScheme4 = new JMenuItem("TODO");
-		colorScheme.add(colorScheme1);
-		colorScheme.add(colorScheme2);
-		colorScheme.add(colorScheme3);
-		colorScheme.add(colorScheme4);
-		menu.add(colorScheme);//adding JMenu to Menu Bar
-		JMenuItem update = new JMenuItem("Update Fractal");
-		JMenuItem close = new JMenuItem("Exit Program");
-		menu.add(update);//adding Menu Item to Menu Bar
-		menu.add(close);//adding Menu Item to Menu Bar
-
-
-
-	}
-
-}
-=======
-
-
-=======
->>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
 package code;
 
 import javax.swing.JOptionPane;
@@ -72,7 +13,7 @@ public class UI extends javax.swing.JFrame {
 	public int[][] array;
 	public int escDist = 4;
 	public FractalPanel _display;
-	public colorModel _color;
+	public colorModelGroup _color;
 	public EscapeTimeAlgorithm _fractal;
 	private javax.swing.JMenu colorScheme;
 	private javax.swing.JMenuItem colorScheme1;
@@ -98,7 +39,7 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void initComponents() {
-		_color = new ColorModel();
+		_color = new colorModelGroup();
 		_display = new FractalPanel();
 		_fractal = new EscapeTimeAlgorithm();
 		fractalOut = new javax.swing.JPanel();
@@ -126,7 +67,7 @@ public class UI extends javax.swing.JFrame {
 
 		escTime.setText("Escape Time");
 		escTime.addMouseListener(new java.awt.event.MouseAdapter() {
-                        @Override
+			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				escTimeMouseClicked(evt);
 			}
@@ -137,7 +78,7 @@ public class UI extends javax.swing.JFrame {
 
 		fracChoice1.setText("Mandelbrot");
 		fracChoice1.addActionListener(new java.awt.event.ActionListener() {
-                        @Override
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				fracChoice1ActionPerformed(evt);
 			}
@@ -146,7 +87,7 @@ public class UI extends javax.swing.JFrame {
 
 		fracChoice2.setText("Julia Set");
 		fracChoice2.addActionListener(new java.awt.event.ActionListener() {
-                        @Override
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				fracChoice2ActionPerformed(evt);
 			}
@@ -156,7 +97,7 @@ public class UI extends javax.swing.JFrame {
 		fracChoice3.setText("Burning Ship");
 
 		fracChoice3.addActionListener(new java.awt.event.ActionListener() {
-                        @Override
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				fracChoice3ActionPerformed(evt);
 			}
@@ -166,7 +107,7 @@ public class UI extends javax.swing.JFrame {
 		fracChoice4.setText("Multibrot");
 
 		fracChoice4.addActionListener(new java.awt.event.ActionListener() {
-                        @Override
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				fracChoice4ActionPerformed(evt);
 			}
@@ -179,7 +120,7 @@ public class UI extends javax.swing.JFrame {
 
 		colorScheme1.setText("TODO");
 		colorScheme1.addActionListener(new java.awt.event.ActionListener() {
-                        @Override
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				colorScheme1actionPerformed(evt);
 			}
@@ -188,7 +129,7 @@ public class UI extends javax.swing.JFrame {
 
 		colorScheme2.setText("TODO");
 		colorScheme2.addActionListener(new java.awt.event.ActionListener() {
-                        @Override
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				colorScheme2actionPerformed(evt);
 			}
@@ -197,7 +138,7 @@ public class UI extends javax.swing.JFrame {
 
 		colorScheme3.setText("TODO");
 		colorScheme3.addActionListener(new java.awt.event.ActionListener() {
-                        @Override
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				colorScheme3actionPerformed(evt);
 			}
@@ -206,7 +147,7 @@ public class UI extends javax.swing.JFrame {
 
 		colorScheme4.setText("TODO");
 		colorScheme4.addActionListener(new java.awt.event.ActionListener() {
-                        @Override
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				colorScheme4actionPerformed(evt);
 			}
@@ -311,20 +252,20 @@ public class UI extends javax.swing.JFrame {
 					break;
 				}
 			}
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| javax.swing.UnsupportedLookAndFeelException ex) {
 			java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
-            // </editor-fold>
-            
+		// </editor-fold>
+
 		// </editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
-                        @Override
+			@Override
 			public void run() {
 				new UI().setVisible(true);
 			}
 		});
 	}
 }
->>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
