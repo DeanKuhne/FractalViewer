@@ -253,7 +253,6 @@ public class UI extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(null, "Bad Input!");//only happens if not good entry
 		}
 	}
-
 	/**
 	 * @param args
 	 *            the command line arguments
