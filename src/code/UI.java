@@ -39,6 +39,17 @@ public class UI extends javax.swing.JFrame {
 		_display.updateImage(array);
 	}
 
+	public static boolean isNumeric(String str) {
+		boolean flag;
+		try {
+			int num = Integer.parseInt(str);
+			flag = true;
+		} catch (NumberFormatException e) {
+			flag = false;
+		}
+		return flag;
+	}
+
 	private void initComponents() {
 		_color = new colorModelGroup();
 		_display = new FractalPanel();
@@ -220,7 +231,7 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void closeActionPerformed(java.awt.event.ActionEvent evt) {
-		dispose();
+		dispose();//scraps everything
 	}
 
 	private void colorScheme4actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,16 +241,16 @@ public class UI extends javax.swing.JFrame {
 
 	private void escTimeMouseClicked(java.awt.event.MouseEvent evt) {
 		String msg = "0";
-		while (msg == null || Integer.valueOf(msg) <= 0) {// while it
-															// is this
-			msg = JOptionPane.showInputDialog(
-					"Enter a new Escape Distance\nCannot Be null, or a negative number!\nYou have to put in a valid number to close this window...");// keep
-			// asking
-			if (msg != null && Integer.valueOf(msg) > 0) {// if it's
-				// valid
-				escDist = Integer.valueOf(msg);// let it go through
-				break;
+		while (true) {
+			msg = JOptionPane.showInputDialog("Enter a new Escape Distance\nCannot Be null, or a negative number!");
+			if (msg == null) return;//if cancel or X is pressed
+			if (msg != null && isNumeric(msg) == true) {//if it's not null and a number
+				if (Integer.valueOf(msg) > 0) {//if it's a valid number
+					escDist = Integer.valueOf(msg);//let it through
+					break;
+				}
 			}
+			JOptionPane.showMessageDialog(null, "Bad Input!");//only happens if not good entry
 		}
 	}
 
