@@ -11,6 +11,9 @@ public class EscapeTimeAlgorithm {
 	private static double yCurrent;
 	private static double xTemp;
 	private static double yTemp;
+	private static int width;
+	private static int steps;
+
 
 	public static double getxVal(int x, int choice) {
 		// method to show x value's translation to the column
@@ -111,7 +114,7 @@ public class EscapeTimeAlgorithm {
 		}
 	}
 
-	public int escTimeCoords(double x, double y, int choice) {
+	public int escTimeCoords(double x, double y, int escDist, int choice) {
 		// method which is used to test the escape time of a single coordinate
 		xCurrent = x;
 		yCurrent = y;
@@ -119,7 +122,7 @@ public class EscapeTimeAlgorithm {
 		yCalc = yCurrent;
 		int passes = 0;
 		double dist = Math.sqrt(Math.pow(xCurrent, 2) + Math.pow(yCurrent, 2));
-		while (dist <= 4 && passes < 255) {
+		while (dist <= escDist && passes < 255) {
 			updateXY(choice);
 			xCalc = xTemp;
 			yCalc = yTemp;
@@ -129,9 +132,11 @@ public class EscapeTimeAlgorithm {
 		return passes;
 	}
 
-	public static int[][] escTimeCalculator(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
+	public int[][] escTimeCalculator(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
 		// method that will return an entire 2d array of escape times
-		int escTimeArray[][] = new int[colAmt][rowAmt];
+		width = colAmt;
+		steps = maxStep;
+		int escTimeArray[][] = new int[width][width];
 		dataInput(choice);
 		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row
 		double yStep = Math.abs(yRangeStart - yRangeEnd) / colAmt;// y is column
@@ -142,23 +147,23 @@ public class EscapeTimeAlgorithm {
 		xCurrent = xCalc;
 		yCurrent = yCalc;
 		double distance;
-		for (int cols = 0; cols < colAmt; cols++) {
+		for (int cols = 0; cols < width; cols++) {
 			yCurrent = yStart + (yStep * cols);
 			xCurrent = xStart;
-			for (int rows = 0; rows < rowAmt; rows++) {
+			for (int rows = 0; rows < width; rows++) {
 				xCurrent = xStart + (xStep * rows);
 				int passes = 0;
 				xCalc = xCurrent;
 				yCalc = yCurrent;
 				distance = (Math.sqrt((xCurrent * xCurrent) + (yCurrent * yCurrent)));
-				while (distance <= escDist && passes < maxStep) {
+				while (distance <= escDist && passes < steps) {
 					updateXY(choice);
 					xCalc = xTemp;
 					yCalc = yTemp;
 					passes++;
 					distance = (Math.sqrt((xCalc * xCalc) + (yCalc * yCalc)));
 				}
-				escTimeArray[cols][rows] = passes;
+				escTimeArray[rows][cols] = passes;
 			}
 		}
 		return escTimeArray;
