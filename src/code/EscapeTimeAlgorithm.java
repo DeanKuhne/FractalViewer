@@ -92,9 +92,6 @@ public class EscapeTimeAlgorithm {
 			yRangeEnd = 1.3;
 		}
 	}
-	public static void setEscapeDistance(int escDist){
-		
-	}
 
 	public static void updateXY(int choice) {
 		// defines the way each function calculates xCalc and yCalc, specific to
@@ -117,7 +114,7 @@ public class EscapeTimeAlgorithm {
 		}
 	}
 
-	public int escTimeCoords(double x, double y, int choice) {
+	public int escTimeCoords(double x, double y, int escDist, int choice) {
 		// method which is used to test the escape time of a single coordinate
 		xCurrent = x;
 		yCurrent = y;
@@ -125,7 +122,7 @@ public class EscapeTimeAlgorithm {
 		yCalc = yCurrent;
 		int passes = 0;
 		double dist = Math.sqrt(Math.pow(xCurrent, 2) + Math.pow(yCurrent, 2));
-		while (dist <= 4 && passes < 255) {
+		while (dist <= escDist && passes < 255) {
 			updateXY(choice);
 			xCalc = xTemp;
 			yCalc = yTemp;
@@ -133,12 +130,6 @@ public class EscapeTimeAlgorithm {
 			dist = Math.sqrt(Math.pow(xCalc, 2) + Math.pow(yCalc, 2));
 		}
 		return passes;
-	}
-	public int getDimensions(){
-		return width;
-	}
-	public int getPasses(){
-		return steps;
 	}
 
 	public int[][] escTimeCalculator(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {

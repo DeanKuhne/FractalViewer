@@ -22,6 +22,7 @@ public class UI extends javax.swing.JFrame {
 	private javax.swing.JMenuItem colorScheme4;
 	private javax.swing.JMenu escTime;
 	private javax.swing.JMenu fracChoice;
+	private javax.swing.JMenuItem close;
 	private javax.swing.JMenuItem fracChoice1;
 	private javax.swing.JMenuItem fracChoice2;
 	private javax.swing.JMenuItem fracChoice3;
@@ -55,6 +56,7 @@ public class UI extends javax.swing.JFrame {
 		colorScheme3 = new javax.swing.JMenuItem();
 		colorScheme4 = new javax.swing.JMenuItem();
 		escTime = new javax.swing.JMenu();
+		close = new javax.swing.JMenuItem();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,12 +115,12 @@ public class UI extends javax.swing.JFrame {
 			}
 		});
 		fracChoice.add(fracChoice4);
-
+		jMenuBar1.add(colorScheme);
 		jMenuBar1.add(fracChoice);
 
 		colorScheme.setText("Color Scheme");
 
-		colorScheme1.setText("TODO");
+		colorScheme1.setText("Ghostscale(B&W)");
 		colorScheme1.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +129,7 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme1);
 
-		colorScheme2.setText("TODO");
+		colorScheme2.setText("Greenscale");
 		colorScheme2.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +138,7 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme2);
 
-		colorScheme3.setText("TODO");
+		colorScheme3.setText("Bluescale");
 		colorScheme3.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +147,7 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme3);
 
-		colorScheme4.setText("TODO");
+		colorScheme4.setText("Redscale");
 		colorScheme4.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +156,14 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme4);
 
-		jMenuBar1.add(colorScheme);
+		jMenuBar1.add(close);
+		close.setText("Close");
+		close.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				closeActionPerformed(evt);
+			}
+		});
 
 		setJMenuBar(jMenuBar1);
 
@@ -172,7 +181,6 @@ public class UI extends javax.swing.JFrame {
 
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
 		// MANDELBROT SELECTED
-		System.out.println("Generating Mand");
 		array = _fractal.escTimeCalculator(512, 512, escDist, 255, 1);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of mandelbrot
@@ -199,36 +207,40 @@ public class UI extends javax.swing.JFrame {
 	private void colorScheme1actionPerformed(java.awt.event.ActionEvent evt) {
 		_display.updateImage(array);
 		_display.setIndexColorModel(_color.GhostColorModel(256));
-		// COLOR SCHEME 1
 	}
 
 	private void colorScheme2actionPerformed(java.awt.event.ActionEvent evt) {
-
 		_display.updateImage(array);
-		// COLOR SCHEME 2
+		_display.setIndexColorModel(_color.GreenscaleColorModel(256));
 	}
 
 	private void colorScheme3actionPerformed(java.awt.event.ActionEvent evt) {
-
 		_display.updateImage(array);
-		// COLOR SCHEME 3
+		_display.setIndexColorModel(_color.BluescaleColorModel(256));
+	}
+
+	private void closeActionPerformed(java.awt.event.ActionEvent evt) {
+		dispose();
 	}
 
 	private void colorScheme4actionPerformed(java.awt.event.ActionEvent evt) {
-
-		// COLOR SCHEME 4
 		_display.updateImage(array);
+		_display.setIndexColorModel(_color.RedscaleColorModel(256));
 	}
 
 	private void escTimeMouseClicked(java.awt.event.MouseEvent evt) {
 		String msg = "0";
-		while (Integer.valueOf(msg) <= 0) {
-			msg = JOptionPane.showInputDialog("Enter a new Escape Distance\nCannot Be null, or a negative number!");
-			if (Integer.valueOf(msg) > 0) {
-				escDist = Integer.valueOf(msg);
+		while (msg == null || Integer.valueOf(msg) <= 0) {// while it
+															// is this
+			msg = JOptionPane.showInputDialog(
+					"Enter a new Escape Distance\nCannot Be null, or a negative number!\nYou have to put in a valid number to close this window...");// keep
+			// asking
+			if (msg != null && Integer.valueOf(msg) > 0) {// if it's
+				// valid
+				escDist = Integer.valueOf(msg);// let it go through
+				break;
 			}
 		}
-		_display.updateImage(array);
 	}
 
 	/**
