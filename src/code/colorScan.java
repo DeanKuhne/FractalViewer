@@ -40,7 +40,7 @@ public class colorScan {
 	    return retVal;
 	  }
 	  
-	  public static IndexColorModle ceateBluesAlphaColorModel(int numColors){
+	  public static IndexColorModel ceateBluesAlphaColorModel(int numColors){
 		  byte[] reds = new byte[numColors];
 		  byte[] greens = new byte[numColors];
 		  byte[] blues = new byte[numColors];
