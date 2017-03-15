@@ -92,8 +92,9 @@ public class UI extends javax.swing.JFrame {
 		initComponents();
 		fractalOut.add(_display);
 		array = _fractal.escTimeCalculator(512, 512, escDist, 255, 1);
-		// this is here so there is a default
-		// fractal displayed upon start
+		/**this is here so there is a default 
+		 * fractal displayed upon start
+		 **/
 		_display.updateImage(array);
 	}
 
