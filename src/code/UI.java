@@ -141,7 +141,7 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme1);
 
-		colorScheme2.setText("Greenscale");
+		colorScheme2.setText("Venom");
 		colorScheme2.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +150,7 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme2);
 
-		colorScheme3.setText("Bluescale");
+		colorScheme3.setText("Random");
 		colorScheme3.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +159,7 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme3);
 
-		colorScheme4.setText("Redscale");
+		colorScheme4.setText("Purple");
 		colorScheme4.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,12 +222,12 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme2actionPerformed(java.awt.event.ActionEvent evt) {
-		_display.setIndexColorModel(_color.GreenscaleColorModel(256));
+		_display.setIndexColorModel(_color.VenomColorModel(256));
 		_display.updateImage(array);
 	}
 
 	private void colorScheme3actionPerformed(java.awt.event.ActionEvent evt) {
-		_display.setIndexColorModel(_color.BluescaleColorModel(256));
+		_display.setIndexColorModel(_color.randomColorModel(256));
 		_display.updateImage(array);
 	}
 
@@ -236,7 +236,7 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme4actionPerformed(java.awt.event.ActionEvent evt) {
-		_display.setIndexColorModel(_color.RedscaleColorModel(256));
+		_display.setIndexColorModel(_color.PurpleColorModel(256));
 		_display.updateImage(array);
 	}
 
