@@ -1,6 +1,10 @@
 
 package code;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.JOptionPane;
 
 import edu.buffalo.fractal.FractalPanel;
@@ -11,7 +15,9 @@ import edu.buffalo.fractal.FractalPanel;
  */
 public class UI extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
+	final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 	public int[][] array;
+	public boolean otherChosen = false;
 	public int escDist = 4;
 	public FractalPanel _display;
 	public colorModelGroup _color;
@@ -217,25 +223,34 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme1actionPerformed(java.awt.event.ActionEvent evt) {
+		executor.shutdown();
 		_display.setIndexColorModel(_color.GhostColorModel(256));
 		_display.updateImage(array);
 	}
 
 	private void colorScheme2actionPerformed(java.awt.event.ActionEvent evt) {
+		executor.shutdown();
 		_display.setIndexColorModel(_color.VenomColorModel(256));
 		_display.updateImage(array);
 	}
 
 	private void colorScheme3actionPerformed(java.awt.event.ActionEvent evt) {
-		_display.setIndexColorModel(_color.randomColorModel(256));
-		_display.updateImage(array);
+		executor.scheduleAtFixedRate(randomize, 0, 100, TimeUnit.MILLISECONDS);
 	}
 
+	Runnable randomize = new Runnable() {
+		public void run() {
+			_display.setIndexColorModel(_color.randomColorModel(256));
+			_display.updateImage(array);
+		}
+	};
+
 	private void closeActionPerformed(java.awt.event.ActionEvent evt) {
-		dispose();//scraps everything
+		dispose();// scraps everything
 	}
 
 	private void colorScheme4actionPerformed(java.awt.event.ActionEvent evt) {
+		executor.shutdown();
 		_display.setIndexColorModel(_color.PurpleColorModel(256));
 		_display.updateImage(array);
 	}
@@ -244,16 +259,24 @@ public class UI extends javax.swing.JFrame {
 		String msg = "0";
 		while (true) {
 			msg = JOptionPane.showInputDialog("Enter a new Escape Distance\nCannot Be null, or a negative number!");
-			if (msg == null) return;//if cancel or X is pressed
-			if (msg != null && isNumeric(msg) == true) {//if it's not null and a number
-				if (Integer.valueOf(msg) > 0) {//if it's a valid number
-					escDist = Integer.valueOf(msg);//let it through
+			if (msg == null)
+				return;// if cancel or X is pressed
+			if (msg != null && isNumeric(msg) == true) {// if it's not null and
+														// a number
+				if (Integer.valueOf(msg) > 0) {// if it's a valid number
+					escDist = Integer.valueOf(msg);// let it through
 					break;
 				}
 			}
-			JOptionPane.showMessageDialog(null, "<html><b>Bad Input!</b></html>");//only happens if not good entry
+			JOptionPane.showMessageDialog(null, "<html><b>Bad Input!</b></html>");// only
+																					// happens
+																					// if
+																					// not
+																					// good
+																					// entry
 		}
 	}
+
 	/**
 	 * @param args
 	 *            the command line arguments
@@ -292,4 +315,5 @@ public class UI extends javax.swing.JFrame {
 		});
 	}
 }
-//>>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
+// >>>>>>> branch 'master' of
+// https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
