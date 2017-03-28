@@ -60,7 +60,7 @@ public class colorModelGroup {
 			greens[i] = (byte) (x * x);
 			x = ran.nextInt(numColors);
 			while (x == 0) x = ran.nextInt(numColors);
-			blues[i] = (byte) (Math.pow(x, 2)+69*x);
+			blues[i] = (byte) (Math.pow(x, 320));
 			x = ran.nextInt(numColors);
 			reds[i] = (byte) (x + x);
 		}

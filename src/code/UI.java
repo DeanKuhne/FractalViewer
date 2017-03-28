@@ -246,7 +246,8 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme3actionPerformed(java.awt.event.ActionEvent evt) {
-		future = executor.scheduleAtFixedRate(randomize, 0, 100, TimeUnit.MILLISECONDS);
+		//did this for fun, makes a random color scheme appear 10 time per second, it stops when another color scheme is chosen.
+		future = executor.scheduleAtFixedRate(randomize, 0, 200, TimeUnit.MILLISECONDS);
 	}
 
 	private void closeActionPerformed(java.awt.event.ActionEvent evt) {
