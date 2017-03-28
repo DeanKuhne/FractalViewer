@@ -57,14 +57,11 @@ public class colorModelGroup {
 		byte[] blues = new byte[numColors];
 		for (int i = 0; i < reds.length - 1; i++) {
 			int x = ran.nextInt(numColors);
-			System.out.println(x);
 			greens[i] = (byte) (x * x);
 			x = ran.nextInt(numColors);
 			while (x == 0) x = ran.nextInt(numColors);
-			System.out.println(x);
 			blues[i] = (byte) (Math.pow(x, 2)+69*x);
 			x = ran.nextInt(numColors);
-			System.out.println(x);
 			reds[i] = (byte) (x + x);
 		}
 		IndexColorModel retVal = new IndexColorModel(8, reds.length, reds, greens, blues);

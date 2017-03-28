@@ -2,6 +2,7 @@
 package code;
 
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -37,6 +38,16 @@ public class UI extends javax.swing.JFrame {
 	private javax.swing.JPanel fractalOut;
 	private javax.swing.JMenuBar jMenuBar1;
 
+	public Runnable randomize = new Runnable() {
+		public void run() {
+			_display.setIndexColorModel(_color.randomColorModel(256));
+			_display.updateImage(array);
+		}
+	};
+	
+	public Future<?> future = executor.scheduleAtFixedRate(randomize, 0, 100, TimeUnit.MILLISECONDS);
+
+	
 	public UI() {
 		initComponents();
 		fractalOut.add(_display);
@@ -156,7 +167,7 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme2);
 
-		colorScheme3.setText("Random");
+		colorScheme3.setText("Random Flasher");
 		colorScheme3.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,34 +234,27 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme1actionPerformed(java.awt.event.ActionEvent evt) {
-		executor.shutdown();
+		future.cancel(true);
 		_display.setIndexColorModel(_color.GhostColorModel(256));
 		_display.updateImage(array);
 	}
 
 	private void colorScheme2actionPerformed(java.awt.event.ActionEvent evt) {
-		executor.shutdown();
+		future.cancel(true);
 		_display.setIndexColorModel(_color.VenomColorModel(256));
 		_display.updateImage(array);
 	}
 
 	private void colorScheme3actionPerformed(java.awt.event.ActionEvent evt) {
-		executor.scheduleAtFixedRate(randomize, 0, 100, TimeUnit.MILLISECONDS);
+		future = executor.scheduleAtFixedRate(randomize, 0, 100, TimeUnit.MILLISECONDS);
 	}
-
-	Runnable randomize = new Runnable() {
-		public void run() {
-			_display.setIndexColorModel(_color.randomColorModel(256));
-			_display.updateImage(array);
-		}
-	};
 
 	private void closeActionPerformed(java.awt.event.ActionEvent evt) {
 		dispose();// scraps everything
 	}
 
 	private void colorScheme4actionPerformed(java.awt.event.ActionEvent evt) {
-		executor.shutdown();
+		future.cancel(true);
 		_display.setIndexColorModel(_color.PurpleColorModel(256));
 		_display.updateImage(array);
 	}
