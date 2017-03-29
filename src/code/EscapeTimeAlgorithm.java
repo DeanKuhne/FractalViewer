@@ -114,7 +114,7 @@ public class EscapeTimeAlgorithm {
 		}
 	}
 
-	public int escTimeCoords(double x, double y, int escDist, int choice) {
+	public int escTimeCoords(double x, double y, int escDist, int pass, int choice) {
 		// method which is used to test the escape time of a single coordinate
 		xCurrent = x;
 		yCurrent = y;
@@ -122,7 +122,7 @@ public class EscapeTimeAlgorithm {
 		yCalc = yCurrent;
 		int passes = 0;
 		double dist = Math.sqrt(Math.pow(xCurrent, 2) + Math.pow(yCurrent, 2));
-		while (dist <= escDist && passes < 255) {
+		while (dist <= escDist && passes < pass) {
 			updateXY(choice);
 			xCalc = xTemp;
 			yCalc = yTemp;

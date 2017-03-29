@@ -10,11 +10,19 @@ public class EscapeTimeCalcTest<E> {
 	EscapeTimeAlgorithm frac = new EscapeTimeAlgorithm();
 
 	@Test
+	public void phase3Tests() {
+		assertEquals(135, frac.escTimeCoords(0.3207031250000001, -0.07109374999999386, 2, 135, 1), .01);// mandelbrot
+		assertEquals(135, frac.escTimeCoords(1.0492187499999897, -0.234375, 2, 135, 2), .01);// julia
+		assertEquals(135, frac.escTimeCoords(-1.7443359374999874, -0.017451171875000338, 2, 135, 3), .01);// burningship
+		assertEquals(135, frac.escTimeCoords(0.5859375, 0.24375000000000108, 2, 135, 4), .01);// multibrot
+	}
+	
+	@Test
 	public void phase2Tests() {
-		assertEquals(10, frac.escTimeCoords(0.46007827788650374, -0.3383561643835661, 3, 1), .01);// mandelbrot
-		assertEquals(10, frac.escTimeCoords(1.4538160469667272, -0.13502935420743645, 3, 2), .01);// julia
-		assertEquals(10, frac.escTimeCoords(-1.6999999999999802, 0.0030136986301371603, 3, 3), .01);// burningship
-		assertEquals(10, frac.escTimeCoords(0.7025440313111545, -0.5520547945205528, 3, 4), .01);// multibrot
+		assertEquals(10, frac.escTimeCoords(0.46007827788650374, -0.3383561643835661, 3, 255, 1), .01);// mandelbrot
+		assertEquals(10, frac.escTimeCoords(1.4538160469667272, -0.13502935420743645, 3, 255, 2), .01);// julia
+		assertEquals(10, frac.escTimeCoords(-1.6999999999999802, 0.0030136986301371603, 3, 255, 3), .01);// burningship
+		assertEquals(10, frac.escTimeCoords(0.7025440313111545, -0.5520547945205528, 3, 255, 4), .01);// multibrot
 	}
 
 	@Test
@@ -49,10 +57,10 @@ public class EscapeTimeCalcTest<E> {
 	public void testNeverEscDist() {
 		// Calculates the escape time for a coordinate whose distance from the
 		// origin never exceeds the escape distance [4 * 6 points = 24 points]
-		assertEquals(255, frac.escTimeCoords(0.3207031250000001, -0.07109374999999386, 4, 1), .01);// mandelbrot
-		assertEquals(255, frac.escTimeCoords(1.0492187499999897, -0.234375, 4, 2), .01);// julia
-		assertEquals(255, frac.escTimeCoords(-1.7443359374999874, -0.017451171875000338, 4, 3), .01);// burning
-		assertEquals(255, frac.escTimeCoords(0.5859375, 0.24375000000000108, 4, 4), .01);// multibrot
+		assertEquals(255, frac.escTimeCoords(0.3207031250000001, -0.07109374999999386, 4,255, 1), .01);// mandelbrot
+		assertEquals(255, frac.escTimeCoords(1.0492187499999897, -0.234375, 4, 255, 2), .01);// julia
+		assertEquals(255, frac.escTimeCoords(-1.7443359374999874, -0.017451171875000338, 4, 255, 3), .01);// burning
+		assertEquals(255, frac.escTimeCoords(0.5859375, 0.24375000000000108, 4, 255, 4), .01);// multibrot
 
 	}
 
@@ -61,9 +69,9 @@ public class EscapeTimeCalcTest<E> {
 		// Calculates the escape time for a coordinate whose distance from the
 		// origin exceeds the escape distance after a single loop pass [3 * 6
 		// points = 18 points]
-		assertEquals(2, frac.escTimeCoords(0.5946289062500001, 1.2949218750000122, 4, 1), .01);// mandelbrot
-		assertEquals(2, frac.escTimeCoords(1.6933593749999853, 0.9765625, 4, 2), .01);// julia
-		assertEquals(2, frac.escTimeCoords(0.9921875, 1.05625, 4, 4), .01);// multibrot
+		assertEquals(2, frac.escTimeCoords(0.5946289062500001, 1.2949218750000122, 4, 255, 1), .01);// mandelbrot
+		assertEquals(2, frac.escTimeCoords(1.6933593749999853, 0.9765625, 4, 255, 2), .01);// julia
+		assertEquals(2, frac.escTimeCoords(0.9921875, 1.05625, 4, 255, 4), .01);// multibrot
 
 	}
 
