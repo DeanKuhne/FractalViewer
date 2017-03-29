@@ -114,7 +114,7 @@ public class EscapeTimeAlgorithm {
 		}
 	}
 
-	public int escTimeCoords(double x, double y, int escDist, int choice) {
+	public int escTimeCoords(double x, double y, int escDist, int pass, int choice) {
 		// method which is used to test the escape time of a single coordinate
 		xCurrent = x;
 		yCurrent = y;
@@ -122,7 +122,7 @@ public class EscapeTimeAlgorithm {
 		yCalc = yCurrent;
 		int passes = 0;
 		double dist = Math.sqrt(Math.pow(xCurrent, 2) + Math.pow(yCurrent, 2));
-		while (dist <= escDist && passes < 255) {
+		while (dist <= escDist && passes < pass) {
 			updateXY(choice);
 			xCalc = xTemp;
 			yCalc = yTemp;
@@ -131,8 +131,44 @@ public class EscapeTimeAlgorithm {
 		}
 		return passes;
 	}
+	public int[][] escTimeCalculatorArea(int xStart, int xEnd, int yStart, int yEnd, int escDist, int maxStep, int choice){
+		int escTimeArray[][] = new int[512][512];
+		xRangeStart = xStart;
+		xRangeEnd = xEnd;
+		yRangeStart = yStart;
+		yRangeEnd = yEnd;
+		double xStep = Math.abs(xRangeStart - xRangeEnd) / 512;// x is row
+		double yStep = Math.abs(yRangeStart - yRangeEnd) / 512;// y is column
+		xStart =(int) xRangeStart;
+		yStart =(int) yRangeStart;
+		xCalc = xStart;
+		yCalc = yStart;
+		xCurrent = xCalc;
+		yCurrent = yCalc;
+		double distance;
+		for (int cols = 0; cols < width; cols++) {
+			yCurrent = yStart + (yStep * cols);
+			xCurrent = xStart;
+			for (int rows = 0; rows < width; rows++) {
+				xCurrent = xStart + (xStep * rows);
+				int passes = 0;
+				xCalc = xCurrent;
+				yCalc = yCurrent;
+				distance = (Math.sqrt((xCurrent * xCurrent) + (yCurrent * yCurrent)));
+				while (distance <= escDist && passes < steps) {
+					updateXY(choice);
+					xCalc = xTemp;
+					yCalc = yTemp;
+					passes++;
+					distance = (Math.sqrt((xCalc * xCalc) + (yCalc * yCalc)));
+				}
+				escTimeArray[rows][cols] = passes;
+			}
+		}
+		return escTimeArray;
+	}
 
-	public int[][] escTimeCalculator(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
+	public int[][] escTimeCalculatorChoice(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
 		// method that will return an entire 2d array of escape times
 		width = colAmt;
 		steps = maxStep;

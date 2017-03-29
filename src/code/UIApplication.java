@@ -7,6 +7,7 @@ public class UIApplication {
 		ui.setVisible(true);
 		ui.setResizable(false);
 	}
+<<<<<<< HEAD
 }
 /*
 public class UIApplication {
@@ -17,3 +18,6 @@ public class UIApplication {
         ui.setResizable(false);
     }
 }*/
+=======
+}
+>>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git

@@ -1,2 +1,2 @@
 To update Escape Time, Choose Escape Time, enter valid data, the choose fractal to display.
-Invalid entries will not be accepted, window will not close(using "ok") unless the data entry is valid.
+Invalid entries will not be accepted, a popup will tell you if the input was bad, and you will be re=prompted to enter correct data.
