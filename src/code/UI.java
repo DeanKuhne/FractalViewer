@@ -1,6 +1,10 @@
 
 package code;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
@@ -37,6 +41,11 @@ public class UI extends javax.swing.JFrame {
 	private javax.swing.JMenuItem fracChoice4;
 	private javax.swing.JPanel fractalOut;
 	private javax.swing.JMenuBar jMenuBar1;
+	private int sX;
+	private int eX;
+	private int sY;
+	private int eY;
+	private boolean drag;
 
 	public Runnable randomize = new Runnable() {
 		public void run() {
@@ -44,14 +53,13 @@ public class UI extends javax.swing.JFrame {
 			_display.updateImage(array);
 		}
 	};
-	
+
 	public Future<?> future = executor.scheduleAtFixedRate(randomize, 0, 100, TimeUnit.MILLISECONDS);
 
-	
 	public UI() {
 		initComponents();
 		fractalOut.add(_display);
-		array = _fractal.escTimeCalculator(512, 512, escDist, 255, 1);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 1);
 		// this is here so there is a default
 		// fractal displayed upon start
 		_display.updateImage(array);
@@ -184,6 +192,20 @@ public class UI extends javax.swing.JFrame {
 			}
 		});
 		colorScheme.add(colorScheme4);
+		fractalOut.addMouseMotionListener(new java.awt.event.MouseAdapter() {
+			public void mouseDragged(java.awt.event.MouseEvent evt) {
+				fractalOutMouseDragged(evt);
+			}
+		});
+		fractalOut.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				fractalOutMousePressed(evt);
+			}
+
+			public void mouseReleased(java.awt.event.MouseEvent evt) {
+				fractalOutMouseReleased(evt);
+			}
+		});
 
 		jMenuBar1.add(close);
 		close.setText("Close");
@@ -208,27 +230,53 @@ public class UI extends javax.swing.JFrame {
 		pack();
 	}
 
+	public void fractalOutMousePressed(java.awt.event.MouseEvent evt) {
+		Point point = evt.getPoint();
+		sX = point.x;
+		sY = point.y;
+		System.out.println("mousePressed at " + point);
+		drag = true;
+	}
+
+	public void fractalOutMouseDragged(java.awt.event.MouseEvent evt) {
+		Point p = evt.getPoint();
+		eX = p.x;
+		eY = p.y;
+		System.out.println("Dragging to " + p);
+	}
+
+	public void fractalOutMouseReleased(java.awt.event.MouseEvent evt) {
+		drag = false;
+		repaint();
+		System.out.println("Drawn rectangle area IS " + sX + "," + sY + " to " + eX + "," + eY);
+	}
+
+	public void paint(Graphics graphic) {
+		int w = eX - sX, h = eY - sY;
+		System.out.println("Rect[" + sX + "," + sY + "] size " + w + "x" + h);
+		graphic.drawRect(sX+4, sY+50, w, h);
+	}
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
 		// MANDELBROT SELECTED
-		array = _fractal.escTimeCalculator(512, 512, escDist, 255, 1);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 1);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of mandelbrot
 	}
 
 	private void fracChoice2ActionPerformed(java.awt.event.ActionEvent evt) {
-		array = _fractal.escTimeCalculator(512, 512, escDist, 255, 2);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 2);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of julia set
 	}
 
 	private void fracChoice3ActionPerformed(java.awt.event.ActionEvent evt) {
-		array = _fractal.escTimeCalculator(512, 512, escDist, 255, 3);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 3);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of burning ship
 	}
 
 	private void fracChoice4ActionPerformed(java.awt.event.ActionEvent evt) {
-		array = _fractal.escTimeCalculator(512, 512, escDist, 255, 4);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 4);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of multibrot
 	}
@@ -246,8 +294,9 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void colorScheme3actionPerformed(java.awt.event.ActionEvent evt) {
-		//did this for fun, makes a random color scheme appear 10 time per second, it stops when another color scheme is chosen.
-		future = executor.scheduleAtFixedRate(randomize, 0, 200, TimeUnit.MILLISECONDS);
+		// did this for fun, makes a random color scheme appear once per second,
+		// it stops when another color scheme is chosen.
+		future = executor.scheduleAtFixedRate(randomize, 0, 1000, TimeUnit.MILLISECONDS);
 	}
 
 	private void closeActionPerformed(java.awt.event.ActionEvent evt) {

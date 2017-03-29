@@ -71,7 +71,7 @@ public class EscapeTimeCalcTest<E> {
 	public void testBurnShipEscDist() {
 		// Calculates that none of the pixels in the Burning Ship set have an
 		// escape time of 0 or 1 [8 points]
-		int[][] array = frac.escTimeCalculator(512, 512, 4, 255, 3);
+		int[][] array = frac.escTimeCalculatorChoice(512, 512, 4, 255, 3);
 		for (int row = 0; row < 512; row++) {
 			for (int col = 0; col < 512; col++) {
 				assertTrue(array[row][col] != 0 && array[row][col] != 1);
@@ -85,13 +85,13 @@ public class EscapeTimeCalcTest<E> {
 		// The method called to calculate the fractal returns a 2-d array with
 		// 512 rows and 512 columns (1 test per fractal) [4 * 2 points = 8
 		// points]
-		int[][] mand = frac.escTimeCalculator(512, 512, 4, 255, 1);
+		int[][] mand = frac.escTimeCalculatorChoice(512, 512, 4, 255, 1);
 		assertTrue(mand.length == 512 && mand[0].length == 512);
-		int[][] juli = frac.escTimeCalculator(512, 512, 4, 255, 2);
+		int[][] juli = frac.escTimeCalculatorChoice(512, 512, 4, 255, 2);
 		assertTrue(juli.length == 512 && juli[0].length == 512);
-		int[][] burn = frac.escTimeCalculator(512, 512, 4, 255, 3);
+		int[][] burn = frac.escTimeCalculatorChoice(512, 512, 4, 255, 3);
 		assertTrue(burn.length == 512 && burn[0].length == 512);
-		int[][] mult = frac.escTimeCalculator(512, 512, 4, 255, 4);
+		int[][] mult = frac.escTimeCalculatorChoice(512, 512, 4, 255, 4);
 		assertTrue(mult.length == 512 && mult[0].length == 512);
 
 	}
