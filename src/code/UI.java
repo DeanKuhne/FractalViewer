@@ -22,6 +22,7 @@ public class UI extends javax.swing.JFrame {
 	public int[][] array;
 	public boolean otherChosen = false;
 	public int escTimeNum = 255;
+	public int choice = 1;
 	public int escDistNum = 4;
 	public FractalPanel _display;
 	public colorModelGroup _color;
@@ -299,24 +300,28 @@ public class UI extends javax.swing.JFrame {
 
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
 		// MANDELBROT SELECTED
+		choice = 1;
 		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 1);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of mandelbrot
 	}
 
 	private void fracChoice2ActionPerformed(java.awt.event.ActionEvent evt) {
+		choice = 2;
 		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 2);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of julia set
 	}
 
 	private void fracChoice3ActionPerformed(java.awt.event.ActionEvent evt) {
+		choice = 3;
 		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 3);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of burning ship
 	}
 
 	private void fracChoice4ActionPerformed(java.awt.event.ActionEvent evt) {
+		choice = 4;
 		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 4);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of multibrot
@@ -355,9 +360,13 @@ public class UI extends javax.swing.JFrame {
 		_display.updateImage(array);
 	}
 
-	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {
+	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {//WORKING HERE CURRENTLY
 		System.out.println(sX + " " + eX + " " + sY + " " + eY);
-		array = _fractal.escTimeCalculatorArea(sX, eX, sY, eY, escDistNum, escTimeNum, 1);
+		double x1 = EscapeTimeAlgorithm.getxVal(sX, choice);//coordinate for pixel sX
+		double x2 = EscapeTimeAlgorithm.getxVal(eX, choice);//coordinate for pixel eX
+		double y1 = EscapeTimeAlgorithm.getyVal(sY, choice);//coordinate for pixel sY
+		double y2 = EscapeTimeAlgorithm.getyVal(eY, choice);//coordinate for pixel eY
+		array = _fractal.escTimeCalculatorArea(x1, x2, y1, y2, escDistNum, escTimeNum, choice);
 		_display.updateImage(array);
 	}
 
