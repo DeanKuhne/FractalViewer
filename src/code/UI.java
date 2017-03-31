@@ -288,9 +288,13 @@ public class UI extends javax.swing.JFrame {
 
 	public void paint(Graphics graphic) {
 		super.paintComponents(graphic);
-		int w = Math.abs(eX - sX), h = Math.abs(eY - sY);
+		int w = Math.abs(eX - sX), h = Math.abs(eY - sY) ;
 		System.out.println("Rect[" + sX + "," + sY + "] size " + w + "x" + h);
-		graphic.drawRect(sX + 4, sY + 50, w, h);
+		//these 4 if blocks make it possible to draw a box despite the start and end points.
+		if(sX<eX&&sY<eY) graphic.drawRect(sX + 4, sY + 50, w, h);
+		if(sX>eX&&sY<eY) graphic.drawRect(eX + 4, sY + 50, w, h);
+		if(sX<eX&&sY>eY) graphic.drawRect(sX + 4, eY + 50, w, h);
+		if(eY<sY&&eX<sX) graphic.drawRect(eX + 4, eY + 50, w, h);
 	}
 
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -352,7 +356,7 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {
-		System.out.println(sX+" "+eX+" "+sY+" "+eY);
+		System.out.println(sX + " " + eX + " " + sY + " " + eY);
 		array = _fractal.escTimeCalculatorArea(sX, eX, sY, eY, escDistNum, escTimeNum, 1);
 		_display.updateImage(array);
 	}
