@@ -6,6 +6,5 @@ public class UIApplication {
 		UI ui = new UI();
 		ui.setBounds(0, 0, 515, 560);
 		ui.setVisible(true);
-		ui.setResizable(false);
 	}
 }

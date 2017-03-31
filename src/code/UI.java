@@ -1,8 +1,6 @@
 
 package code;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.concurrent.Executors;
@@ -243,6 +241,7 @@ public class UI extends javax.swing.JFrame {
 		eX = p.x;
 		eY = p.y;
 		System.out.println("Dragging to " + p);
+		if(drag) repaint();
 	}
 
 	public void fractalOutMouseReleased(java.awt.event.MouseEvent evt) {
@@ -252,10 +251,12 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	public void paint(Graphics graphic) {
+		super.paintComponents(graphic);
 		int w = eX - sX, h = eY - sY;
 		System.out.println("Rect[" + sX + "," + sY + "] size " + w + "x" + h);
-		graphic.drawRect(sX+4, sY+50, w, h);
+		graphic.drawRect(sX + 4, sY + 50, w, h);
 	}
+
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
 		// MANDELBROT SELECTED
 		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 1);
