@@ -21,7 +21,8 @@ public class UI extends javax.swing.JFrame {
 	final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 	public int[][] array;
 	public boolean otherChosen = false;
-	public int escDist = 4;
+	public int escTimeNum = 255;
+	public int escDistNum = 4;
 	public FractalPanel _display;
 	public colorModelGroup _color;
 	public EscapeTimeAlgorithm _fractal;
@@ -31,6 +32,10 @@ public class UI extends javax.swing.JFrame {
 	private javax.swing.JMenuItem colorScheme3;
 	private javax.swing.JMenuItem colorScheme4;
 	private javax.swing.JMenu escTime;
+	private javax.swing.JMenu escDist;
+	private javax.swing.JMenu zoom;
+	private javax.swing.JMenuItem zoom1;
+	private javax.swing.JMenuItem zoom2;
 	private javax.swing.JMenu fracChoice;
 	private javax.swing.JMenuItem close;
 	private javax.swing.JMenuItem fracChoice1;
@@ -57,7 +62,7 @@ public class UI extends javax.swing.JFrame {
 	public UI() {
 		initComponents();
 		fractalOut.add(_display);
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 1);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 1);
 		// this is here so there is a default
 		// fractal displayed upon start
 		_display.updateImage(array);
@@ -91,6 +96,10 @@ public class UI extends javax.swing.JFrame {
 		colorScheme3 = new javax.swing.JMenuItem();
 		colorScheme4 = new javax.swing.JMenuItem();
 		escTime = new javax.swing.JMenu();
+		escDist = new javax.swing.JMenu();
+		zoom = new javax.swing.JMenu();
+		zoom1 = new javax.swing.JMenuItem();
+		zoom2 = new javax.swing.JMenuItem();
 		close = new javax.swing.JMenuItem();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,11 +111,19 @@ public class UI extends javax.swing.JFrame {
 		fractalOutLayout.setVerticalGroup(fractalOutLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 281, Short.MAX_VALUE));
 
+		escDist.setText("Escape Distance");
+		escDist.addMouseListener(new java.awt.event.MouseAdapter() {
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				escTimeMouseClicked(evt);
+			}
+		});
+		jMenuBar1.add(escDist);
 		escTime.setText("Escape Time");
 		escTime.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				escTimeMouseClicked(evt);
+				escDistMouseClicked(evt);
 			}
 		});
 		jMenuBar1.add(escTime);
@@ -190,6 +207,7 @@ public class UI extends javax.swing.JFrame {
 			}
 		});
 		colorScheme.add(colorScheme4);
+
 		fractalOut.addMouseMotionListener(new java.awt.event.MouseAdapter() {
 			public void mouseDragged(java.awt.event.MouseEvent evt) {
 				fractalOutMouseDragged(evt);
@@ -204,7 +222,24 @@ public class UI extends javax.swing.JFrame {
 				fractalOutMouseReleased(evt);
 			}
 		});
-
+		zoom.setText("Zoom");
+		zoom.add(zoom1);
+		zoom1.setText("Select Area");
+		zoom1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zoomInActionPerformed(evt);
+			}
+		});
+		zoom.add(zoom2);
+		zoom2.setText("Reset Zoom");
+		zoom2.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				resetZoomActionPerformed(evt);
+			}
+		});
+		jMenuBar1.add(zoom);
 		jMenuBar1.add(close);
 		close.setText("Close");
 		close.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +276,8 @@ public class UI extends javax.swing.JFrame {
 		eX = p.x;
 		eY = p.y;
 		System.out.println("Dragging to " + p);
-		if(drag) repaint();
+		if (drag)
+			repaint();
 	}
 
 	public void fractalOutMouseReleased(java.awt.event.MouseEvent evt) {
@@ -252,32 +288,32 @@ public class UI extends javax.swing.JFrame {
 
 	public void paint(Graphics graphic) {
 		super.paintComponents(graphic);
-		int w = eX - sX, h = eY - sY;
+		int w = Math.abs(eX - sX), h = Math.abs(eY - sY);
 		System.out.println("Rect[" + sX + "," + sY + "] size " + w + "x" + h);
 		graphic.drawRect(sX + 4, sY + 50, w, h);
 	}
 
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
 		// MANDELBROT SELECTED
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 1);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 1);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of mandelbrot
 	}
 
 	private void fracChoice2ActionPerformed(java.awt.event.ActionEvent evt) {
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 2);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 2);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of julia set
 	}
 
 	private void fracChoice3ActionPerformed(java.awt.event.ActionEvent evt) {
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 3);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 3);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of burning ship
 	}
 
 	private void fracChoice4ActionPerformed(java.awt.event.ActionEvent evt) {
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDist, 255, 4);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 4);
 		_display.updateImage(array);
 		// 512 high,512 wide, escape distance of 4, choice of multibrot
 	}
@@ -310,7 +346,18 @@ public class UI extends javax.swing.JFrame {
 		_display.updateImage(array);
 	}
 
-	private void escTimeMouseClicked(java.awt.event.MouseEvent evt) {
+	private void resetZoomActionPerformed(java.awt.event.ActionEvent evt) {
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 1);
+		_display.updateImage(array);
+	}
+
+	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {
+		System.out.println(sX+" "+eX+" "+sY+" "+eY);
+		array = _fractal.escTimeCalculatorArea(sX, eX, sY, eY, escDistNum, escTimeNum, 1);
+		_display.updateImage(array);
+	}
+
+	private void escDistMouseClicked(java.awt.event.MouseEvent evt) {
 		String msg = "0";
 		while (true) {
 			msg = JOptionPane.showInputDialog("Enter a new Escape Distance\nCannot Be null, or a negative number!");
@@ -319,7 +366,34 @@ public class UI extends javax.swing.JFrame {
 			if (msg != null && isNumeric(msg) == true) {// if it's not null and
 														// a number
 				if (Integer.valueOf(msg) > 0) {// if it's a valid number
-					escDist = Integer.valueOf(msg);// let it through
+					escDistNum = Integer.valueOf(msg);// let it through
+					break;
+				}
+			}
+			JOptionPane.showMessageDialog(null, "<html><b>Bad Input!</b></html>");// only
+																					// happens
+																					// if
+																					// not
+																					// good
+																					// entry
+		}
+	}
+
+	private void escTimeMouseClicked(java.awt.event.MouseEvent evt) {
+		String msg = "0";
+		while (true) {
+			msg = JOptionPane.showInputDialog(
+					"Enter a new Escape Time\nCannot Be null, or a negative number!\nAlso must be between 1 and 255 inclusive.");
+			if (msg == null)
+				return;// if cancel or X is pressed
+			if (msg != null && isNumeric(msg) == true) {// if it's not null and
+														// a number
+				if (Integer.valueOf(msg) > 0 && Integer.valueOf(msg) <= 255) {// if
+																				// it's
+																				// a
+																				// valid
+																				// number
+					escTimeNum = Integer.valueOf(msg);// let it through
 					break;
 				}
 			}

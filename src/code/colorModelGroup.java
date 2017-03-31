@@ -1,6 +1,5 @@
 package code;
 
-import java.awt.Color;
 import java.awt.image.IndexColorModel;
 import java.util.Random;
 
