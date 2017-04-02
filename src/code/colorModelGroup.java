@@ -48,10 +48,7 @@ public class colorModelGroup {
 		IndexColorModel retVal = new IndexColorModel(8, reds.length, reds, greens, blues, alphas);
 		return retVal;
 	}
-<<<<<<< HEAD
-}
-=======
-
+	
 	public IndexColorModel randomColorModel(int numColors) {
 		Random ran = new Random();
 		byte[] reds = new byte[numColors];
@@ -70,4 +67,4 @@ public class colorModelGroup {
 		return retVal;
 	}
 }
->>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
+//>>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
