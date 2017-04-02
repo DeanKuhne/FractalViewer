@@ -131,7 +131,7 @@ public class EscapeTimeAlgorithm {
 		}
 		return passes;
 	}
-	public int[][] escTimeCalculatorArea(int xStart, int xEnd, int yStart, int yEnd, int escDist, int maxStep, int choice){
+	public int[][] escTimeCalculatorArea(double xStart, double xEnd, double yStart, double yEnd, int escDist, int maxStep, int choice){
 		int escTimeArray[][] = new int[512][512];
 		xRangeStart = xStart;
 		xRangeEnd = xEnd;
