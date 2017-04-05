@@ -183,7 +183,7 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme1);
 
-		colorScheme2.setText("Venom");
+		colorScheme2.setText("Greeen Flame!");
 		colorScheme2.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,7 +293,7 @@ public class UI extends javax.swing.JFrame {
 			graphic.drawRect(eX + 8, eY + 31, w, h);
 		graphic.setColor(Color.ORANGE);
 		graphic.fillRect(0, 543, 540, 13);// Border
-		graphic.fillRect(520, 0, 13, 543);// Border
+		graphic.fillRect(520, 0, 15, 543);// Border
 	}
 
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
