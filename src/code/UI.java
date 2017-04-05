@@ -264,7 +264,7 @@ public class UI extends javax.swing.JFrame {
 
 	public void fractalOutMouseDragged(java.awt.event.MouseEvent evt) {
 		Point p = evt.getPoint();
-		if (p.x < 512 && p.y < 512) {
+		if (p.x < 512 && p.y < 512 && p.x > -1 && p.y > -1) {
 			eX = p.x;
 			eY = p.y;
 			if (drag)
@@ -360,10 +360,24 @@ public class UI extends javax.swing.JFrame {
 
 	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {
 		// obtains coordinates and updates fractal
-		double x1 = EscapeTimeAlgorithm.getxVal(sX, choice);
-		double x2 = EscapeTimeAlgorithm.getxVal(eX, choice);
-		double y1 = EscapeTimeAlgorithm.getyVal(sY, choice);
-		double y2 = EscapeTimeAlgorithm.getyVal(eY, choice);
+		double x1;
+		double x2;
+		double y1;
+		double y2;
+		if (sX < eX) {// if start point is less than end
+			x1 = EscapeTimeAlgorithm.getxVal(sX, choice);
+			x2 = EscapeTimeAlgorithm.getxVal(eX, choice);
+		} else {
+			x1 = EscapeTimeAlgorithm.getxVal(eX, choice);
+			x2 = EscapeTimeAlgorithm.getxVal(sX, choice);
+		}
+		if (sY < eY) {// if start point is less than end
+			y1 = EscapeTimeAlgorithm.getyVal(sY, choice);
+			y2 = EscapeTimeAlgorithm.getyVal(eY, choice);
+		} else {
+			y1 = EscapeTimeAlgorithm.getyVal(eY, choice);
+			y2 = EscapeTimeAlgorithm.getyVal(sY, choice);
+		}
 		array = _fractal.escTimeCalculatorArea(x1, x2, y1, y2, escDistNum, escTimeNum, choice);
 		_display.updateImage(array);
 	}

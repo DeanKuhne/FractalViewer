@@ -1,2 +1,5 @@
-To update Escape Time, Choose Escape Time, enter valid data, the choose fractal to display.
-Invalid entries will not be accepted, a popup will tell you if the input was bad, and you will be re=prompted to enter correct data.
+To update Escape Time, Choose Escape Time, enter valid data(numeric, 1-255), the choose fractal to display.
+
+To update Escape Distance, Choose Escape Distance, enter a valid input(numeric, positive #), then choose what fractal to display.
+
+Invalid entries will not be accepted, a pop-up will tell you if the input was bad, and you will be re=prompted to enter correct data.
