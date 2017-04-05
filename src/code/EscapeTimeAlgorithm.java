@@ -15,7 +15,6 @@ public class EscapeTimeAlgorithm {
 	private static int height;
 	private static int steps;
 
-
 	public static double getxVal(int x, int choice) {
 		// method to show x value's translation to the column
 		double xVal;
@@ -132,8 +131,10 @@ public class EscapeTimeAlgorithm {
 		}
 		return passes;
 	}
-	//The problem with incorrect display IS because of this method...
-	public int[][] escTimeCalculatorArea(double xS, double xE, double yS, double yE, int escDist, int maxStep, int choice){
+
+	// The problem with incorrect display IS because of this method...
+	public int[][] escTimeCalculatorArea(double xS, double xE, double yS, double yE, int escDist, int maxStep,
+			int choice) {
 		xRangeStart = xS;
 		xRangeEnd = xE;
 		yRangeStart = yS;
@@ -144,7 +145,7 @@ public class EscapeTimeAlgorithm {
 		double yStep = Math.abs(yRangeStart - yRangeEnd) / 512;// y is column
 		double xStart = xRangeStart;
 		double yStart = yRangeStart;
-		//Ended BT Here BRB
+		// Ended BT Here BRB
 		xCalc = xStart;
 		yCalc = yStart;
 		xCurrent = xCalc;

@@ -16,7 +16,7 @@ public class EscapeTimeCalcTest<E> {
 		assertEquals(135, frac.escTimeCoords(-1.7443359374999874, -0.017451171875000338, 2, 135, 3), .01);// burningship
 		assertEquals(135, frac.escTimeCoords(0.5859375, 0.24375000000000108, 2, 135, 4), .01);// multibrot
 	}
-	
+
 	@Test
 	public void phase2Tests() {
 		assertEquals(10, frac.escTimeCoords(0.46007827788650374, -0.3383561643835661, 3, 255, 1), .01);// mandelbrot
@@ -32,14 +32,14 @@ public class EscapeTimeCalcTest<E> {
 
 		// method getxVal takes in the row number, and the choice as to which
 		// fractal you want
-		assertEquals(0.6, EscapeTimeAlgorithm.getxVal(511, 1), .01);// mandelbrot
-		assertEquals(1.7, EscapeTimeAlgorithm.getxVal(511, 2), .01);// julia
-		assertEquals(-1.7, EscapeTimeAlgorithm.getxVal(511, 3), .01);// burning
-		assertEquals(1.0, EscapeTimeAlgorithm.getxVal(511, 4), .01);// multibrot
 		assertEquals(-2.15, EscapeTimeAlgorithm.getxVal(0, 1), .01);// mandelbrot
 		assertEquals(-1.7, EscapeTimeAlgorithm.getxVal(0, 2), .01);// julia
 		assertEquals(-1.8, EscapeTimeAlgorithm.getxVal(0, 3), .01);// burning
 		assertEquals(-1.0, EscapeTimeAlgorithm.getxVal(0, 4), .01);// multibrot
+		assertEquals(0.6, EscapeTimeAlgorithm.getxVal(511, 1), .01);// mandelbrot
+		assertEquals(1.7, EscapeTimeAlgorithm.getxVal(511, 2), .01);// julia
+		assertEquals(-1.7, EscapeTimeAlgorithm.getxVal(511, 3), .01);// burning
+		assertEquals(1.0, EscapeTimeAlgorithm.getxVal(511, 4), .01);// multibrot
 
 	}
 
@@ -64,7 +64,7 @@ public class EscapeTimeCalcTest<E> {
 	public void testNeverEscDist() {
 		// Calculates the escape time for a coordinate whose distance from the
 		// origin never exceeds the escape distance [4 * 6 points = 24 points]
-		assertEquals(255, frac.escTimeCoords(0.3207031250000001, -0.07109374999999386, 4,255, 1), .01);// mandelbrot
+		assertEquals(255, frac.escTimeCoords(0.3207031250000001, -0.07109374999999386, 4, 255, 1), .01);// mandelbrot
 		assertEquals(255, frac.escTimeCoords(1.0492187499999897, -0.234375, 4, 255, 2), .01);// julia
 		assertEquals(255, frac.escTimeCoords(-1.7443359374999874, -0.017451171875000338, 4, 255, 3), .01);// burning
 		assertEquals(255, frac.escTimeCoords(0.5859375, 0.24375000000000108, 4, 255, 4), .01);// multibrot
