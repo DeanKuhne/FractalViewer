@@ -32,10 +32,14 @@ public class EscapeTimeCalcTest<E> {
 
 		// method getxVal takes in the row number, and the choice as to which
 		// fractal you want
-		assertEquals(-0.807226562499999900, EscapeTimeAlgorithm.getxVal(250, 1), .000001);// mandelbrot
-		assertEquals(-0.039843749999999956, EscapeTimeAlgorithm.getxVal(250, 2), .000001);// julia
-		assertEquals(-1.751171875000000000, EscapeTimeAlgorithm.getxVal(250, 3), .000001);// burning
-		assertEquals(-0.023437500000000000, EscapeTimeAlgorithm.getxVal(250, 4), .000001);// multibrot
+		assertEquals(0.6, EscapeTimeAlgorithm.getxVal(511, 1), .01);// mandelbrot
+		assertEquals(1.7, EscapeTimeAlgorithm.getxVal(511, 2), .01);// julia
+		assertEquals(-1.7, EscapeTimeAlgorithm.getxVal(511, 3), .01);// burning
+		assertEquals(1.0, EscapeTimeAlgorithm.getxVal(511, 4), .01);// multibrot
+		assertEquals(-2.15, EscapeTimeAlgorithm.getxVal(0, 1), .01);// mandelbrot
+		assertEquals(-1.7, EscapeTimeAlgorithm.getxVal(0, 2), .01);// julia
+		assertEquals(-1.8, EscapeTimeAlgorithm.getxVal(0, 3), .01);// burning
+		assertEquals(-1.0, EscapeTimeAlgorithm.getxVal(0, 4), .01);// multibrot
 
 	}
 
@@ -46,11 +50,14 @@ public class EscapeTimeCalcTest<E> {
 
 		// method getyVal takes in the column number, and the choice as to which
 		// fractal you want
-		assertEquals(-0.030468750000000044, EscapeTimeAlgorithm.getyVal(250, 1), .000001);// mandelbrot
-		assertEquals(-0.023437500000000000, EscapeTimeAlgorithm.getyVal(250, 2), .000001);// julia
-		assertEquals(-0.028730468749999995, EscapeTimeAlgorithm.getyVal(250, 3), .000001);// burning
-		assertEquals(-0.030468750000000044, EscapeTimeAlgorithm.getyVal(250, 4), .000001);// multibrot
-
+		assertEquals(-1.3, EscapeTimeAlgorithm.getyVal(0, 1), .01);// mandelbrot
+		assertEquals(-1.0, EscapeTimeAlgorithm.getyVal(0, 2), .01);// julia
+		assertEquals(-0.08, EscapeTimeAlgorithm.getyVal(0, 3), .01);// burning
+		assertEquals(-1.3, EscapeTimeAlgorithm.getyVal(0, 4), .01);// multibrot
+		assertEquals(1.3, EscapeTimeAlgorithm.getyVal(511, 1), .01);// mandelbrot
+		assertEquals(1.0, EscapeTimeAlgorithm.getyVal(511, 2), .01);// julia
+		assertEquals(0.025, EscapeTimeAlgorithm.getyVal(511, 3), .01);// burning
+		assertEquals(1.3, EscapeTimeAlgorithm.getyVal(511, 4), .01);// multibrot
 	}
 
 	@Test

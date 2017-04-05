@@ -12,6 +12,7 @@ public class EscapeTimeAlgorithm {
 	private static double xTemp;
 	private static double yTemp;
 	private static int width;
+	private static int height;
 	private static int steps;
 
 
@@ -131,25 +132,28 @@ public class EscapeTimeAlgorithm {
 		}
 		return passes;
 	}
-	public int[][] escTimeCalculatorArea(double xStart, double xEnd, double yStart, double yEnd, int escDist, int maxStep, int choice){
-		int escTimeArray[][] = new int[512][512];
-		xRangeStart = xStart;
-		xRangeEnd = xEnd;
-		yRangeStart = yStart;
-		yRangeEnd = yEnd;
+	//The problem with incorrect display IS because of this method...
+	public int[][] escTimeCalculatorArea(double xS, double xE, double yS, double yE, int escDist, int maxStep, int choice){
+		xRangeStart = xS;
+		xRangeEnd = xE;
+		yRangeStart = yS;
+		yRangeEnd = yE;
+		steps = maxStep;
+		int escTimeArray[][] = new int[width][width];
 		double xStep = Math.abs(xRangeStart - xRangeEnd) / 512;// x is row
 		double yStep = Math.abs(yRangeStart - yRangeEnd) / 512;// y is column
-		xStart =(int) xRangeStart;
-		yStart =(int) yRangeStart;
+		double xStart = xRangeStart;
+		double yStart = yRangeStart;
+		//Ended BT Here BRB
 		xCalc = xStart;
 		yCalc = yStart;
 		xCurrent = xCalc;
 		yCurrent = yCalc;
 		double distance;
-		for (int cols = 0; cols < width; cols++) {
+		for (int cols = 0; cols < 512; cols++) {
 			yCurrent = yStart + (yStep * cols);
 			xCurrent = xStart;
-			for (int rows = 0; rows < width; rows++) {
+			for (int rows = 0; rows < 512; rows++) {
 				xCurrent = xStart + (xStep * rows);
 				int passes = 0;
 				xCalc = xCurrent;
@@ -170,10 +174,11 @@ public class EscapeTimeAlgorithm {
 
 	public int[][] escTimeCalculatorChoice(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
 		// method that will return an entire 2d array of escape times
+		dataInput(choice);
 		width = colAmt;
+		height = rowAmt;
 		steps = maxStep;
 		int escTimeArray[][] = new int[width][width];
-		dataInput(choice);
 		double xStep = Math.abs(xRangeStart - xRangeEnd) / rowAmt;// x is row
 		double yStep = Math.abs(yRangeStart - yRangeEnd) / colAmt;// y is column
 		double xStart = xRangeStart;
@@ -186,7 +191,7 @@ public class EscapeTimeAlgorithm {
 		for (int cols = 0; cols < width; cols++) {
 			yCurrent = yStart + (yStep * cols);
 			xCurrent = xStart;
-			for (int rows = 0; rows < width; rows++) {
+			for (int rows = 0; rows < height; rows++) {
 				xCurrent = xStart + (xStep * rows);
 				int passes = 0;
 				xCalc = xCurrent;
