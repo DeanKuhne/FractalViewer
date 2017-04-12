@@ -910,11 +910,11 @@ public class UI extends javax.swing.JFrame {
 		// 512 high,512 wide, escape distance of 4, choice of multibrot
 	}
 
->>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
+//>>>>>>> branch 'master' of https://github.com/CSE116-Spring2017/semesterlongproject-b5-bitsplease.git
 	private void colorScheme1actionPerformed(java.awt.event.ActionEvent evt) {
 		future.cancel(true);
 		_display.setIndexColorModel(_color.GhostColorModel(256));
-<<<<<<< HEAD
+//<<<<<<< HEAD
 		_display.updateImage(array);
 	}
 
@@ -989,10 +989,9 @@ public class UI extends javax.swing.JFrame {
 			}
 		});
 	}
-}
-=======
-		_display.updateImage(array);
-	}
+//=======
+		//_display.
+
 
 	private void colorScheme2actionPerformed(java.awt.event.ActionEvent evt) {
 		future.cancel(true);
