@@ -586,6 +586,7 @@ public class UI extends javax.swing.JFrame {
 
 package code;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.concurrent.Executors;
@@ -767,7 +768,7 @@ public class UI extends javax.swing.JFrame {
 		});
 		colorScheme.add(colorScheme1);
 
-		colorScheme2.setText("Venom");
+		colorScheme2.setText("Greeen Flame!");
 		colorScheme2.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -834,18 +835,8 @@ public class UI extends javax.swing.JFrame {
 				closeActionPerformed(evt);
 			}
 		});
-
-		setJMenuBar(jMenuBar1);
-
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(fractalOut,
-						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(fractalOut,
-						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-
+		this.add(fractalOut);
+		this.getContentPane().add(jMenuBar1, java.awt.BorderLayout.SOUTH);
 		pack();
 	}
 
@@ -853,34 +844,41 @@ public class UI extends javax.swing.JFrame {
 		Point point = evt.getPoint();
 		sX = point.x;
 		sY = point.y;
-		System.out.println("mousePressed at " + point);
 		drag = true;
 	}
 
 	public void fractalOutMouseDragged(java.awt.event.MouseEvent evt) {
 		Point p = evt.getPoint();
-		eX = p.x;
-		eY = p.y;
-		System.out.println("Dragging to " + p);
-		if (drag)
-			repaint();
+		if (p.x < 512 && p.y < 512 && p.x > -1 && p.y > -1) {
+			eX = p.x;
+			eY = p.y;
+			if (drag)
+				repaint();
+		}
 	}
 
 	public void fractalOutMouseReleased(java.awt.event.MouseEvent evt) {
 		drag = false;
 		repaint();
-		System.out.println("Drawn rectangle area IS " + sX + "," + sY + " to " + eX + "," + eY);
 	}
 
 	public void paint(Graphics graphic) {
 		super.paintComponents(graphic);
-		int w = Math.abs(eX - sX), h = Math.abs(eY - sY) ;
-		System.out.println("Rect[" + sX + "," + sY + "] size " + w + "x" + h);
-		//these 4 if blocks make it possible to draw a box despite the start and end points.
-		if(sX<eX&&sY<eY) graphic.drawRect(sX + 4, sY + 50, w, h);
-		if(sX>eX&&sY<eY) graphic.drawRect(eX + 4, sY + 50, w, h);
-		if(sX<eX&&sY>eY) graphic.drawRect(sX + 4, eY + 50, w, h);
-		if(eY<sY&&eX<sX) graphic.drawRect(eX + 4, eY + 50, w, h);
+		graphic.setColor(Color.RED);
+		int w = Math.abs(eX - sX), h = Math.abs(eY - sY);
+		// these 4 if blocks make it possible to draw a box despite the start
+		// and end points.
+		if (sX < eX && sY < eY)
+			graphic.drawRect(sX + 8, sY + 31, w, h);
+		if (sX > eX && sY < eY)
+			graphic.drawRect(eX + 8, sY + 31, w, h);
+		if (sX < eX && sY > eY)
+			graphic.drawRect(sX + 8, eY + 31, w, h);
+		if (eY < sY && eX < sX)
+			graphic.drawRect(eX + 8, eY + 31, w, h);
+		graphic.setColor(Color.ORANGE);
+		graphic.fillRect(0, 543, 540, 13);// Border
+		graphic.fillRect(520, 0, 15, 543);// Border
 	}
 
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1019,16 +1017,30 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void resetZoomActionPerformed(java.awt.event.ActionEvent evt) {
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 1);
+		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, choice);
 		_display.updateImage(array);
 	}
 
-	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {//WORKING HERE CURRENTLY
-		System.out.println(sX + " " + eX + " " + sY + " " + eY);
-		double x1 = EscapeTimeAlgorithm.getxVal(sX, choice);//coordinate for pixel sX
-		double x2 = EscapeTimeAlgorithm.getxVal(eX, choice);//coordinate for pixel eX
-		double y1 = EscapeTimeAlgorithm.getyVal(sY, choice);//coordinate for pixel sY
-		double y2 = EscapeTimeAlgorithm.getyVal(eY, choice);//coordinate for pixel eY
+	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {
+		// obtains coordinates and updates fractal
+		double x1;
+		double x2;
+		double y1;
+		double y2;
+		if (sX < eX) {// if start point is less than end
+			x1 = EscapeTimeAlgorithm.getxVal(sX, choice);
+			x2 = EscapeTimeAlgorithm.getxVal(eX, choice);
+		} else {
+			x1 = EscapeTimeAlgorithm.getxVal(eX, choice);
+			x2 = EscapeTimeAlgorithm.getxVal(sX, choice);
+		}
+		if (sY < eY) {// if start point is less than end
+			y1 = EscapeTimeAlgorithm.getyVal(sY, choice);
+			y2 = EscapeTimeAlgorithm.getyVal(eY, choice);
+		} else {
+			y1 = EscapeTimeAlgorithm.getyVal(eY, choice);
+			y2 = EscapeTimeAlgorithm.getyVal(sY, choice);
+		}
 		array = _fractal.escTimeCalculatorArea(x1, x2, y1, y2, escDistNum, escTimeNum, choice);
 		_display.updateImage(array);
 	}
@@ -1046,12 +1058,8 @@ public class UI extends javax.swing.JFrame {
 					break;
 				}
 			}
-			JOptionPane.showMessageDialog(null, "<html><b>Bad Input!</b></html>");// only
-																					// happens
-																					// if
-																					// not
-																					// good
-																					// entry
+			JOptionPane.showMessageDialog(null, "<html><b>Bad Input!</b></html>");
+			// only happens if not good entry
 		}
 	}
 
@@ -1064,21 +1072,14 @@ public class UI extends javax.swing.JFrame {
 				return;// if cancel or X is pressed
 			if (msg != null && isNumeric(msg) == true) {// if it's not null and
 														// a number
-				if (Integer.valueOf(msg) > 0 && Integer.valueOf(msg) <= 255) {// if
-																				// it's
-																				// a
-																				// valid
-																				// number
+				if (Integer.valueOf(msg) > 0 && Integer.valueOf(msg) <= 255) {
+					// if it's a valid entry
 					escTimeNum = Integer.valueOf(msg);// let it through
 					break;
 				}
 			}
-			JOptionPane.showMessageDialog(null, "<html><b>Bad Input!</b></html>");// only
-																					// happens
-																					// if
-																					// not
-																					// good
-																					// entry
+			JOptionPane.showMessageDialog(null, "<html><b>Bad Input!</b></html>");
+			// only happens if not good entry
 		}
 	}
 

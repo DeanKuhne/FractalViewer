@@ -1,0 +1,1 @@
+To reset view, click on the "Zoom" menu option, then select "reset zoom".

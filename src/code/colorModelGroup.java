@@ -58,7 +58,8 @@ public class colorModelGroup {
 			int x = ran.nextInt(numColors);
 			greens[i] = (byte) (x * x);
 			x = ran.nextInt(numColors);
-			while (x == 0) x = ran.nextInt(numColors);
+			while (x == 0)
+				x = ran.nextInt(numColors);
 			blues[i] = (byte) (Math.pow(x, 320));
 			x = ran.nextInt(numColors);
 			reds[i] = (byte) (x + x);
