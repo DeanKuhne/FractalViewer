@@ -291,8 +291,8 @@ public class UI extends javax.swing.JFrame {
 		if (eY < sY && eX < sX)
 			graphic.drawRect(eX + 8, eY + 31, w, h);
 		graphic.setColor(Color.ORANGE);
-		graphic.fillRect(0, 543, 540, 13);// Border
-		graphic.fillRect(520, 0, 15, 543);// Border
+		graphic.fillRect(0, 533, 540, 13);// Border
+		graphic.fillRect(510, 0, 15, 543);// Border
 	}
 
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
