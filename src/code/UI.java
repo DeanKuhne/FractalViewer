@@ -1,15 +1,17 @@
 package code;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
+import edu.buffalo.fractal.*;
 import edu.buffalo.fractal.FractalPanel;
 
 /**
@@ -22,6 +24,7 @@ public class UI extends javax.swing.JFrame {
 	public int[][] array;
 	public boolean otherChosen = false;
 	public int escTimeNum = 255;
+	public int numThreads = 1;
 	public int choice = 1;
 	public int escDistNum = 4;
 	public FractalPanel _display;
@@ -45,11 +48,14 @@ public class UI extends javax.swing.JFrame {
 	private javax.swing.JMenuItem fracChoice4;
 	private javax.swing.JPanel fractalOut;
 	private javax.swing.JMenuBar jMenuBar1;
+	private javax.swing.JMenu multiThre;
+	private javax.swing.JMenuItem computeMulti;
 	private int sX;
 	private int eX;
 	private int sY;
 	private int eY;
 	private boolean drag;
+	public ComputePool multiThread = new ComputePool();
 
 	public Runnable randomize = new Runnable() {
 		public void run() {
@@ -63,10 +69,11 @@ public class UI extends javax.swing.JFrame {
 	public UI() {
 		initComponents();
 		fractalOut.add(_display);
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 1);
+		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 1);
 		// this is here so there is a default
 		// fractal displayed upon start
 		_display.updateImage(array);
+		multiThread.changePanel(_display);
 	}
 
 	public static boolean isNumeric(String str) {
@@ -98,11 +105,16 @@ public class UI extends javax.swing.JFrame {
 		colorScheme4 = new javax.swing.JMenuItem();
 		escTime = new javax.swing.JMenu();
 		escDist = new javax.swing.JMenu();
+		multiThre = new javax.swing.JMenu();
+		computeMulti = new javax.swing.JMenuItem();
 		zoom = new javax.swing.JMenu();
 		zoom1 = new javax.swing.JMenuItem();
 		zoom2 = new javax.swing.JMenuItem();
 		close = new javax.swing.JMenuItem();
-
+		multiThread.changePanel(_display);
+//		_display.setSize(2048,2048);
+		_display.setPreferredSize(new Dimension(2048,2048));
+		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		javax.swing.GroupLayout fractalOutLayout = new javax.swing.GroupLayout(fractalOut);
@@ -112,6 +124,24 @@ public class UI extends javax.swing.JFrame {
 		fractalOutLayout.setVerticalGroup(fractalOutLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 281, Short.MAX_VALUE));
 
+		multiThre.setText("Choice of multi thread");
+		
+		
+		// computeMulti is a JMenuItem
+		computeMulti.setText("Enter the number of thread for computing");
+		computeMulti.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				multiThreadMouseClicked(evt);
+			}
+		});
+		
+		// multiThre is a JMenu
+		multiThre.add(computeMulti);
+		
+		
+		jMenuBar1.add(multiThre);
+		
 		escDist.setText("Escape Distance");
 		escDist.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
@@ -180,6 +210,7 @@ public class UI extends javax.swing.JFrame {
 				colorScheme1actionPerformed(evt);
 			}
 		});
+		
 		colorScheme.add(colorScheme1);
 
 		colorScheme2.setText("Greeen Flame!");
@@ -263,7 +294,7 @@ public class UI extends javax.swing.JFrame {
 
 	public void fractalOutMouseDragged(java.awt.event.MouseEvent evt) {
 		Point p = evt.getPoint();
-		if (p.x < 512 && p.y < 512 && p.x > -1 && p.y > -1) {
+		if (p.x < 2048 && p.y < 2048 && p.x > -1 && p.y > -1) {
 			eX = p.x;
 			eY = p.y;
 			if (drag)
@@ -298,30 +329,30 @@ public class UI extends javax.swing.JFrame {
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
 		// MANDELBROT SELECTED
 		choice = 1;
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 1);
+		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 1);
 		_display.updateImage(array);
-		// 512 high,512 wide, escape distance of 4, choice of mandelbrot
+		// 2048 high,2048 wide, escape distance of 4, choice of mandelbrot
 	}
 
 	private void fracChoice2ActionPerformed(java.awt.event.ActionEvent evt) {
 		choice = 2;
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 2);
+		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 2);
 		_display.updateImage(array);
-		// 512 high,512 wide, escape distance of 4, choice of julia set
+		// 2048 high,2048 wide, escape distance of 4, choice of julia set
 	}
 
 	private void fracChoice3ActionPerformed(java.awt.event.ActionEvent evt) {
 		choice = 3;
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 3);
+		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 3);
 		_display.updateImage(array);
-		// 512 high,512 wide, escape distance of 4, choice of burning ship
+		// 2048 high,2048 wide, escape distance of 4, choice of burning ship
 	}
 
 	private void fracChoice4ActionPerformed(java.awt.event.ActionEvent evt) {
 		choice = 4;
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, 4);
+		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 4);
 		_display.updateImage(array);
-		// 512 high,512 wide, escape distance of 4, choice of multibrot
+		// 2048 high,2048 wide, escape distance of 4, choice of multibrot
 	}
 
 	private void colorScheme1actionPerformed(java.awt.event.ActionEvent evt) {
@@ -353,7 +384,7 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void resetZoomActionPerformed(java.awt.event.ActionEvent evt) {
-		array = _fractal.escTimeCalculatorChoice(512, 512, escDistNum, escTimeNum, choice);
+		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, choice);
 		_display.updateImage(array);
 	}
 
@@ -390,7 +421,9 @@ public class UI extends javax.swing.JFrame {
 			if (msg != null && isNumeric(msg) == true) {// if it's not null and
 														// a number
 				if (Integer.valueOf(msg) > 0) {// if it's a valid number
-					escDistNum = Integer.valueOf(msg);// let it through
+					escDistNum = Integer.valueOf(msg);
+					array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, choice);
+					_display.updateImage(array);// let it through
 					break;
 				}
 			}
@@ -398,19 +431,73 @@ public class UI extends javax.swing.JFrame {
 			// only happens if not good entry
 		}
 	}
-
-	private void escTimeMouseClicked(java.awt.event.MouseEvent evt) {
+	
+	private void multiThreadMouseClicked(java.awt.event.ActionEvent evt) {
 		String msg = "0";
 		while (true) {
-			msg = JOptionPane.showInputDialog(
-					"Enter a new Escape Time\nCannot Be null, or a negative number!\nAlso must be between 1 and 255 inclusive.");
+			msg = JOptionPane.showInputDialog("Enter a numbe of threads to generate picture\n");
 			if (msg == null)
 				return;// if cancel or X is pressed
 			if (msg != null && isNumeric(msg) == true) {// if it's not null and
 														// a number
-				if (Integer.valueOf(msg) > 0 && Integer.valueOf(msg) <= 255) {
+				if (Integer.valueOf(msg) > 0) {
 					// if it's a valid entry
-					escTimeNum = Integer.valueOf(msg);// let it through
+					numThreads = Integer.valueOf(msg);
+					
+					int ystart = 1;
+					int yend = 1;
+					multiThread.clearPool();
+					SwingWorker<WorkerResult,Void>[] workers = new SwingWorker[numThreads];
+					
+					if(2048 % numThreads == 0){
+						int even = 2048 / numThreads;
+						
+						for(int i =1; i <= numThreads;i++){
+							ystart = (i - 1) * even;
+							yend  = i * even-1;
+							
+							workers[i-1] = new worker(i,choice,escTimeNum,escDistNum,ystart,yend);
+						}
+					}
+					else{
+						int left = 2048 % numThreads;
+						int even = (2048 - left) / (numThreads - 1);
+						for(int i = 1; i< numThreads; i++){
+							ystart = (i - 1) * even;
+							yend  = i * even-1;
+							workers[i-1] = new worker(i,choice,escTimeNum,escDistNum,ystart,yend);
+						}
+						ystart = (numThreads - 1) *even;
+						workers[numThreads-1] = new worker(numThreads,choice,escTimeNum,escDistNum,ystart,2047);
+					}
+					
+					multiThread.generateFractal(2048, workers);
+					
+					// let it through
+					break;
+				}
+			}
+			JOptionPane.showMessageDialog(null, "<html><b>Bad Input!</b></html>");
+			// only happens if not good entry
+		}
+	}
+	
+	private void escTimeMouseClicked(java.awt.event.MouseEvent evt) {
+
+		String msg1 = "0";
+		while (true) {
+			msg1 = JOptionPane.showInputDialog(
+					"Enter a new Escape Time\nCannot Be null, or a negative number!\nAlso must be between 1 and 255 inclusive.");
+			if (msg1 == null)
+				return;// if cancel or X is pressed
+			if (msg1 != null && isNumeric(msg1) == true) {// if it's not null and
+														// a number
+
+				if (Integer.valueOf(msg1) > 0 && Integer.valueOf(msg1) <= 255) {
+					// if it's a valid entry
+					escTimeNum = Integer.valueOf(msg1);// let it through
+					array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, choice);
+					_display.updateImage(array);
 					break;
 				}
 			}
@@ -423,6 +510,7 @@ public class UI extends javax.swing.JFrame {
 	 * @param args
 	 *            the command line arguments
 	 */
+	
 	public static void main(String args[]) {
 		/* Set the Nimbus look and feel */
 		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting

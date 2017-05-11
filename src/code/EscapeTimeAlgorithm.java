@@ -19,7 +19,7 @@ public class EscapeTimeAlgorithm {
 		// method to show x value's translation to the column
 		double xVal;
 		dataInput(choice);
-		double xStep = Math.abs(xRangeStart - xRangeEnd) / 512;// x is row
+		double xStep = Math.abs(xRangeStart - xRangeEnd) / 2048;// x is row
 		if (choice == 1) {// mandelbrot set
 			xVal = x * xStep + xRangeStart;
 		} else if (choice == 2) {// julia set
@@ -38,7 +38,7 @@ public class EscapeTimeAlgorithm {
 		// method to show y value's translation to the row
 		double yVal;
 		dataInput(choice);
-		double yStep = Math.abs(yRangeStart - yRangeEnd) / 512;// y is column
+		double yStep = Math.abs(yRangeStart - yRangeEnd) / 2048;// y is column
 		if (choice == 1) {// mandelbrot set
 			yVal = y * yStep + yRangeStart;
 		} else if (choice == 2) {// julia set
@@ -141,8 +141,8 @@ public class EscapeTimeAlgorithm {
 		yRangeEnd = yE;
 		steps = maxStep;
 		int escTimeArray[][] = new int[width][width];
-		double xStep = Math.abs(xRangeStart - xRangeEnd) / 512;// x is row
-		double yStep = Math.abs(yRangeStart - yRangeEnd) / 512;// y is column
+		double xStep = Math.abs(xRangeStart - xRangeEnd) / 2048;// x is row
+		double yStep = Math.abs(yRangeStart - yRangeEnd) / 2048;// y is column
 		double xStart = xRangeStart;
 		double yStart = yRangeStart;
 		// Ended BT Here BRB
@@ -151,10 +151,10 @@ public class EscapeTimeAlgorithm {
 		xCurrent = xCalc;
 		yCurrent = yCalc;
 		double distance;
-		for (int cols = 0; cols < 512; cols++) {
+		for (int cols = 0; cols < 2048; cols++) {
 			yCurrent = yStart + (yStep * cols);
 			xCurrent = xStart;
-			for (int rows = 0; rows < 512; rows++) {
+			for (int rows = 0; rows < 2048; rows++) {
 				xCurrent = xStart + (xStep * rows);
 				int passes = 0;
 				xCalc = xCurrent;
@@ -171,6 +171,60 @@ public class EscapeTimeAlgorithm {
 			}
 		}
 		return escTimeArray;
+	}
+
+	
+	
+	public int[][] escTimeCalculatorPart(double xS, double xE, double yS, double yE, int escDist, int maxStep,
+			int choice, int length) {
+		double xRangeStart1 = xS;
+		double xRangeEnd1 = xE;
+		yRangeStart = yS;
+		yRangeEnd = yE;
+		steps = maxStep;
+		int escTimeArray[][] = new int[length][2048];
+		double xStep = Math.abs(xRangeStart1 - xRangeEnd1) / length;// x is row
+		double yStep = Math.abs(yRangeStart - yRangeEnd) / 2048;// y is column
+		double[] row = new double[length];
+		double[] col = new double[2048];
+		double row_start = xRangeStart1;
+		for (int i = 0; i < length; i++) {
+			row[i] = row_start + xStep;
+			row_start += xStep;
+		}
+		double col_start = yRangeStart;
+		for (int j = 0; j < 2048; j++) {
+			col[j] = col_start + yStep;
+			col_start += yStep;
+		}
+		
+		
+		
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < 2048; j++) {
+				escTimeArray[i][j] = someFun(row[i], col[j],choice, escDist);
+			}
+		}
+		return escTimeArray;
+	}
+	
+	
+	private int someFun(double d, double e,int choice, double escDist) {
+		int passes = 0;
+		xCurrent = d;
+		yCurrent = e;
+		xCalc = xCurrent;
+		yCalc = yCurrent;
+		double distance = (Math.sqrt((xCurrent * xCurrent) + (yCurrent * yCurrent)));
+		while (distance <= escDist && passes < steps) {
+			updateXY(choice);
+			xCalc = xTemp;
+			yCalc = yTemp;
+			passes++;
+			distance = (Math.sqrt((xCalc * xCalc) + (yCalc * yCalc)));
+		}
+//		System.out.println("each time passes is: " + passes);
+		return passes;
 	}
 
 	public int[][] escTimeCalculatorChoice(int colAmt, int rowAmt, int escDist, int maxStep, int choice) {
@@ -210,4 +264,8 @@ public class EscapeTimeAlgorithm {
 		}
 		return escTimeArray;
 	}
+	
+	
+	
+	
 }
