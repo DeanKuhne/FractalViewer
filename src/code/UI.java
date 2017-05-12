@@ -56,7 +56,7 @@ public class UI extends javax.swing.JFrame {
 	private int eY;
 	private boolean drag;
 	public ComputePool multiThread = new ComputePool();
-
+	SwingWorker<WorkerResult,Void>[] workers;
 	public Runnable randomize = new Runnable() {
 		public void run() {
 			_display.setIndexColorModel(_color.randomColorModel(256));
@@ -114,6 +114,9 @@ public class UI extends javax.swing.JFrame {
 		multiThread.changePanel(_display);
 //		_display.setSize(2048,2048);
 		_display.setPreferredSize(new Dimension(2048,2048));
+		
+		workers = new SwingWorker[numThreads];
+		generateSwingWorker();
 		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -444,32 +447,9 @@ public class UI extends javax.swing.JFrame {
 					// if it's a valid entry
 					numThreads = Integer.valueOf(msg);
 					
-					int ystart = 1;
-					int yend = 1;
-					multiThread.clearPool();
-					SwingWorker<WorkerResult,Void>[] workers = new SwingWorker[numThreads];
 					
-					if(2048 % numThreads == 0){
-						int even = 2048 / numThreads;
-						
-						for(int i =1; i <= numThreads;i++){
-							ystart = (i - 1) * even;
-							yend  = i * even-1;
-							
-							workers[i-1] = new worker(i,choice,escTimeNum,escDistNum,ystart,yend);
-						}
-					}
-					else{
-						int left = 2048 % numThreads;
-						int even = (2048 - left) / (numThreads - 1);
-						for(int i = 1; i< numThreads; i++){
-							ystart = (i - 1) * even;
-							yend  = i * even-1;
-							workers[i-1] = new worker(i,choice,escTimeNum,escDistNum,ystart,yend);
-						}
-						ystart = (numThreads - 1) *even;
-						workers[numThreads-1] = new worker(numThreads,choice,escTimeNum,escDistNum,ystart,2047);
-					}
+					multiThread.clearPool();
+					generateSwingWorker();
 					
 					multiThread.generateFractal(2048, workers);
 					
@@ -479,6 +459,33 @@ public class UI extends javax.swing.JFrame {
 			}
 			JOptionPane.showMessageDialog(null, "<html><b>Bad Input!</b></html>");
 			// only happens if not good entry
+		}
+	}
+	
+	private void generateSwingWorker(){
+		int ystart = 1;
+		int yend = 1;
+		workers = new SwingWorker[numThreads];
+		if(2048 % numThreads == 0){
+			int even = 2048 / numThreads;
+			
+			for(int i =1; i <= numThreads;i++){
+				ystart = (i - 1) * even;
+				yend  = i * even-1;
+				
+				workers[i-1] = new worker(i,choice,escTimeNum,escDistNum,ystart,yend);
+			}
+		}
+		else{
+			int left = 2048 % numThreads;
+			int even = (2048 - left) / (numThreads - 1);
+			for(int i = 1; i< numThreads; i++){
+				ystart = (i - 1) * even;
+				yend  = i * even-1;
+				workers[i-1] = new worker(i,choice,escTimeNum,escDistNum,ystart,yend);
+			}
+			ystart = (numThreads - 1) *even;
+			workers[numThreads-1] = new worker(numThreads,choice,escTimeNum,escDistNum,ystart,2047);
 		}
 	}
 	
