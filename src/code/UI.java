@@ -60,7 +60,8 @@ public class UI extends javax.swing.JFrame {
 	public Runnable randomize = new Runnable() {
 		public void run() {
 			_display.setIndexColorModel(_color.randomColorModel(256));
-			_display.updateImage(array);
+//			_display.updateImage(array);
+			multiThread.generateFractal(2048, workers);
 		}
 	};
 
@@ -145,7 +146,7 @@ public class UI extends javax.swing.JFrame {
 		
 		jMenuBar1.add(multiThre);
 		
-		escDist.setText("Escape Distance");
+		escDist.setText("Escape Time");
 		escDist.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -153,7 +154,7 @@ public class UI extends javax.swing.JFrame {
 			}
 		});
 		jMenuBar1.add(escDist);
-		escTime.setText("Escape Time");
+		escTime.setText("Escape Distance");
 		escTime.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -284,7 +285,7 @@ public class UI extends javax.swing.JFrame {
 			}
 		});
 		this.add(fractalOut);
-		this.getContentPane().add(jMenuBar1, java.awt.BorderLayout.SOUTH);
+		this.getContentPane().add(jMenuBar1, java.awt.BorderLayout.NORTH);
 		pack();
 	}
 
@@ -325,36 +326,44 @@ public class UI extends javax.swing.JFrame {
 		if (eY < sY && eX < sX)
 			graphic.drawRect(eX + 8, eY + 31, w, h);
 		graphic.setColor(Color.ORANGE);
-		graphic.fillRect(0, 533, 540, 13);// Border
-		graphic.fillRect(510, 0, 15, 543);// Border
+//		graphic.fillRect(0, 533, 540, 13);// Border
+//		graphic.fillRect(510, 0, 15, 543);// Border
 	}
 
 	private void fracChoice1ActionPerformed(java.awt.event.ActionEvent evt) {
 		// MANDELBROT SELECTED
 		choice = 1;
-		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 1);
-		_display.updateImage(array);
+//		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 1);
+//		_display.updateImage(array);
+		generateSwingWorker();
+		multiThread.generateFractal(2048, workers);
 		// 2048 high,2048 wide, escape distance of 4, choice of mandelbrot
 	}
 
 	private void fracChoice2ActionPerformed(java.awt.event.ActionEvent evt) {
 		choice = 2;
-		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 2);
-		_display.updateImage(array);
+//		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 2);
+//		_display.updateImage(array);
+		generateSwingWorker();
+		multiThread.generateFractal(2048, workers);
 		// 2048 high,2048 wide, escape distance of 4, choice of julia set
 	}
 
 	private void fracChoice3ActionPerformed(java.awt.event.ActionEvent evt) {
 		choice = 3;
-		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 3);
-		_display.updateImage(array);
+//		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 3);
+//		_display.updateImage(array);
+		generateSwingWorker();
+		multiThread.generateFractal(2048, workers);
 		// 2048 high,2048 wide, escape distance of 4, choice of burning ship
 	}
 
 	private void fracChoice4ActionPerformed(java.awt.event.ActionEvent evt) {
 		choice = 4;
-		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 4);
-		_display.updateImage(array);
+//		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, 4);
+//		_display.updateImage(array);
+		generateSwingWorker();
+		multiThread.generateFractal(2048, workers);
 		// 2048 high,2048 wide, escape distance of 4, choice of multibrot
 	}
 
@@ -362,12 +371,16 @@ public class UI extends javax.swing.JFrame {
 		future.cancel(true);
 		_display.setIndexColorModel(_color.GhostColorModel(256));
 		_display.updateImage(array);
+//		generateSwingWorker();
+//		multiThread.generateFractal(2048, workers);
 	}
 
 	private void colorScheme2actionPerformed(java.awt.event.ActionEvent evt) {
 		future.cancel(true);
 		_display.setIndexColorModel(_color.VenomColorModel(256));
 		_display.updateImage(array);
+//		generateSwingWorker();
+//		multiThread.generateFractal(2048, workers);
 	}
 
 	private void colorScheme3actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,11 +397,15 @@ public class UI extends javax.swing.JFrame {
 		future.cancel(true);
 		_display.setIndexColorModel(_color.PurpleColorModel(256));
 		_display.updateImage(array);
+//		generateSwingWorker();
+//		multiThread.generateFractal(2048, workers);
 	}
 
 	private void resetZoomActionPerformed(java.awt.event.ActionEvent evt) {
-		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, choice);
-		_display.updateImage(array);
+//		array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, choice);
+//		_display.updateImage(array);
+		generateSwingWorker();
+		multiThread.generateFractal(2048, workers);
 	}
 
 	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,6 +430,8 @@ public class UI extends javax.swing.JFrame {
 		}
 		array = _fractal.escTimeCalculatorArea(x1, x2, y1, y2, escDistNum, escTimeNum, choice);
 		_display.updateImage(array);
+//		generateSwingWorker();
+//		multiThread.generateFractal(2048, workers);
 	}
 
 	private void escDistMouseClicked(java.awt.event.MouseEvent evt) {
@@ -425,8 +444,10 @@ public class UI extends javax.swing.JFrame {
 														// a number
 				if (Integer.valueOf(msg) > 0) {// if it's a valid number
 					escDistNum = Integer.valueOf(msg);
-					array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, choice);
-					_display.updateImage(array);// let it through
+//					array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, choice);
+//					_display.updateImage(array);// let it through
+					generateSwingWorker();
+					multiThread.generateFractal(2048, workers);
 					break;
 				}
 			}
@@ -490,7 +511,6 @@ public class UI extends javax.swing.JFrame {
 	}
 	
 	private void escTimeMouseClicked(java.awt.event.MouseEvent evt) {
-
 		String msg1 = "0";
 		while (true) {
 			msg1 = JOptionPane.showInputDialog(
@@ -503,8 +523,10 @@ public class UI extends javax.swing.JFrame {
 				if (Integer.valueOf(msg1) > 0 && Integer.valueOf(msg1) <= 255) {
 					// if it's a valid entry
 					escTimeNum = Integer.valueOf(msg1);// let it through
-					array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, choice);
-					_display.updateImage(array);
+//					array = _fractal.escTimeCalculatorChoice(2048, 2048, escDistNum, escTimeNum, choice);
+//					_display.updateImage(array);
+					generateSwingWorker();
+					multiThread.generateFractal(2048, workers);
 					break;
 				}
 			}

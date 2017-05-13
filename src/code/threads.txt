@@ -1,0 +1,6 @@
+NumThreads is a integer variable and is initialized in UI.java.
+According to the NumThreads, an array of swing worker named workers is generated.
+A class called worker is created to extends swing worker, and override doinbackground method
+DoinBackground will call a method in EscapeTimeAlgorithm to generate the arrays.
+To generate picture with multiple threads, generateFractal is used, with parameters 2048 and an array of swing worker
+

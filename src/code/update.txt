@@ -3,3 +3,14 @@ To update Escape Time, Choose Escape Time, enter valid data(numeric, 1-255), the
 To update Escape Distance, Choose Escape Distance, enter a valid input(numeric, positive #), then choose what fractal to display.
 
 Invalid entries will not be accepted, a pop-up will tell you if the input was bad, and you will be re=prompted to enter correct data.
+
+##############################################
+
+update worker class, which extends swing worker and override doinbackground
+
+update action listener to multiple threads
+
+update method to generate a array of swing worker
+
+update method to calculate columns for each swing worker
+

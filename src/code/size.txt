@@ -1,0 +1,3 @@
+To set the size and reset the size, there is an method in UI.java, in the method initComponents(),
+_display.setSize(2048,2048); will display the picture in 2048*2048
+By commenting this line, the method will run in 512*512

@@ -1,3 +1,5 @@
 To run, run UIApplication as main
 
 To use this program, go along the menu bar from left to right changing things if you need to.
+To use multi thread, click the "choice of multithread" at JMenuBar, click "enter the number of computing", 
+ranging from 1 to 2048 integer number, then the swing worker will separate the job and print out the separate result
